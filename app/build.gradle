@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+    defaultConfig {
+        applicationId 'jp.icecreamparfait.intern.cyberagent.holidayin'
+        minSdkVersion 14
+        targetSdkVersion 20
+        versionCode 1
+        versionName '1.0'
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("holidayin_keystore.jks")
+            storePassword "ameba10th"
+            keyAlias "holidayin_alias"
+            keyPassword "ameba10th"
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':foursquareoauthlibrary')
+    compile project(':easyFoursquare4Android')
+}
