@@ -1,6 +1,7 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -37,26 +39,17 @@ public class SearchActivity extends Activity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
-        Button button_oauth = (Button) findViewById(R.id.button_oauth);
-        button_oauth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         Button button_search = (Button) findViewById(R.id.button_search);
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyFoursquare efs = new EasyFoursquare(SearchActivity.this);
-                VenuesCriteria criteria = new VenuesCriteria();
-                Location loc = new Location("");
-                loc.setLongitude(139.7069874);
-                loc.setLatitude(35.6432274);
-                criteria.setLocation(loc);
-                ArrayList<Venue> venues = efs.getVenuesNearby(criteria);
-                Log.d("Icecream", venues.toString());
+                EditText editText_keyword = (EditText) findViewById(R.id.editText_keyword);
+
+                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                String query = editText_keyword.getText().toString();
+                intent.putExtra("query", query);
+                startActivity(intent);
             }
         });
 

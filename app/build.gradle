@@ -30,7 +30,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v13:20.+'
     compile project(':foursquareoauthlibrary')
     compile project(':easyFoursquare4Android')
 }

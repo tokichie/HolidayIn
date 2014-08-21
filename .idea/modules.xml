@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HolidayIn.iml" filepath="$PROJECT_DIR$/HolidayIn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easyFoursquare4Android/easyFoursquare4Android.iml" filepath="$PROJECT_DIR$/easyFoursquare4Android/easyFoursquare4Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/foursquareoauthlibrary/foursquareoauthlibrary.iml" filepath="$PROJECT_DIR$/foursquareoauthlibrary/foursquareoauthlibrary.iml" />
+    </modules>
+  </component>
+</project>
+
