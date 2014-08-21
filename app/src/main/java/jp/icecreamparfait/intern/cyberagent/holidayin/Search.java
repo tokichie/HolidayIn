@@ -22,12 +22,7 @@ import br.com.condesales.models.Venue;
 
 public class Search extends Activity {
 
-    private static final int REQUEST_CODE_FSQ_CONNECT = 200;
-    private static final int REQUEST_CODE_FSQ_TOKEN_EXCHANGE = 201;
-    private static final String DEFAULT_VERSION_DATE = "20140820";
-    private static final String CLIENT_ID = "UJ4ENP0LIKT3EQNUVVLQXFTKNUTWZZSF5BB0YFHVX3NA1WNM";
-    private static final String CLIENT_SECRET = "I3OIFOA0KGRLH5UTR2WSKXEMW2JLYG20NOVXX0PATFELX3P4";
-    private static final String REDIRECT_URL = "https://github.com/techcampman/tokyo_smartphone1_C";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +43,7 @@ public class Search extends Activity {
         button_oauth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = FoursquareOAuth.getConnectIntent(Search.this, CLIENT_ID);
-                if (FoursquareOAuth.isPlayStoreIntent(intent)) {
-                    //toastMessage(Search.this, "アプリがインストールされていません。");
-                    startActivity(intent);
-                } else {
-                    startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT);
-                }
+
             }
         });
 
@@ -65,8 +54,8 @@ public class Search extends Activity {
                 EasyFoursquare efs = new EasyFoursquare(Search.this);
                 VenuesCriteria criteria = new VenuesCriteria();
                 Location loc = new Location("");
-                loc.setLatitude(41.7);
-                loc.setAltitude(70.0);
+                loc.setLongitude(139.7069874);
+                loc.setLatitude(35.6432274);
                 criteria.setLocation(loc);
                 ArrayList<Venue> venues = efs.getVenuesNearby(criteria);
                 Log.d("Icecream", venues.toString());
