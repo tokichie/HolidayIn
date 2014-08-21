@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-import br.com.condesales.models.Statistics;
+import br.com.condesales.EasyFoursquare;
+import br.com.condesales.models.Category;
 import br.com.condesales.models.Venue;
 
 /**
@@ -35,14 +35,22 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
             convertView = layoutInflater_.inflate(R.layout.detail_row, null);
         }
 
+        List<Category> categories = item.getCategories();
+        String category = "";
+        for (int i = 0; i < categories.size(); i++) {
+            category += categories.get(i).getName();
+            if (i != categories.size()-1) category += ", ";
+        }
+
         TextView textView_title;
         textView_title = (TextView)convertView.findViewById(R.id.textView_title);
         textView_title.setText(item.getName());
 
-        TextView textView_detail;
-        textView_detail = (TextView) convertView.findViewById(R.id.textView_detail);
-        textView_detail.setText("id: " + item.getId());
+        TextView textView_category;
+        textView_category = (TextView) convertView.findViewById(R.id.textView_category);
+        textView_category.setText(category);
 
+        ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
 
         return convertView;
     }

@@ -32,4 +32,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':foursquareoauthlibrary')
     compile project(':easyFoursquare4Android')
+    compile 'com.google.android.gms:play-services:5.0.89'
 }

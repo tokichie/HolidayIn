@@ -47,6 +47,7 @@ public class SearchActivity extends Activity {
                 EditText editText_keyword = (EditText) findViewById(R.id.editText_keyword);
 
                 Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                //Intent intent = new Intent(SearchActivity.this, MyActivity.class);
                 String query = editText_keyword.getText().toString();
                 intent.putExtra("query", query);
                 startActivity(intent);
