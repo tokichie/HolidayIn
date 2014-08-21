@@ -1,86 +1,54 @@
-<LinearLayout
-    android:orientation="vertical"
+<TableLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shrinkColumns="1"
+    android:stretchColumns="1"
+    android:gravity="center_vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
+    <TableRow
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="キーワード"
+            android:id="@+id/textView2" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_keyword" />
 
-    </LinearLayout>
+    </TableRow>
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所要時間"
+            android:id="@+id/textView" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="キーワード"
-                android:id="@+id/textView2" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner" />
+    </TableRow>
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:text="キーワード"
-                android:textColor="@android:color/primary_text_dark" />
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        </TableRow>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="検索"
+            android:id="@+id/button_search"
+            android:layout_span="2" />
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="所要時間"
-                android:id="@+id/textView" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="検索"
-                android:id="@+id/button_search" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="認証"
-                android:id="@+id/button_oauth" />
-        </TableRow>
-    </TableLayout>
-</LinearLayout>
+    </TableRow>
+</TableLayout>
