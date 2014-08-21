@@ -1,0 +1,4 @@
+include ':app'
+include ':foursquareoauthlibrary'
+include ':easyFoursquare4Android'
+include ':easyFoursquare4Android'
