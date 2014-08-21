@@ -1,7 +1,6 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import com.foursquare.android.nativeoauth.FoursquareOAuth;
 
 import java.util.ArrayList;
 
@@ -20,7 +18,7 @@ import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Venue;
 
 
-public class Search extends Activity {
+public class SearchActivity extends Activity {
 
 
 
@@ -51,7 +49,7 @@ public class Search extends Activity {
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyFoursquare efs = new EasyFoursquare(Search.this);
+                EasyFoursquare efs = new EasyFoursquare(SearchActivity.this);
                 VenuesCriteria criteria = new VenuesCriteria();
                 Location loc = new Location("");
                 loc.setLongitude(139.7069874);
