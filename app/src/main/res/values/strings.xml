@@ -7,5 +7,10 @@
     <string name="title_activity_search">Search</string>
     <string name="login_with_4sq">Foursquareでログイン</string>
     <string name="no_login">ログインせずに利用</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="tab1">シングル</string>
+    <string name="tab2">プラン</string>
 
 </resources>
