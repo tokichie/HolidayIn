@@ -2,19 +2,19 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/src/main/res" >
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/src/main/res" >
             <file
                 name="foursquare_icon"
-                path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/src/main/res/drawable/foursquare_icon.png"
+                path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/src/main/res/drawable/foursquare_icon.png"
                 qualifiers=""
                 type="drawable" />
             <file
                 name="dialog_layout"
-                path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/src/main/res/layout/dialog_layout.xml"
+                path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/src/main/res/layout/dialog_layout.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/src/main/res/values/strings.xml"
+                path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/src/main/res/values/strings.xml"
                 qualifiers="" >
                 <string name="app_name" >EasyFousquare
                 </string>
@@ -22,11 +22,11 @@
                 </string>
             </file>
         </source>
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/build/generated/res/rs/release" />
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/build/generated/res/generated/release" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/build/generated/res/rs/release" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/build/generated/res/generated/release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/easyFoursquare4Android/src/release/res" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/easyFoursquare4Android/src/release/res" />
     </dataSet>
 
 </merger>

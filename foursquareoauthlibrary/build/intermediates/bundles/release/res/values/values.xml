@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="loading">Talking to Foursquare servers…</string>

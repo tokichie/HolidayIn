@@ -23,6 +23,8 @@ import br.com.condesales.EasyFoursquare;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Favorite1Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;

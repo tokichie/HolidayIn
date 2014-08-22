@@ -2,24 +2,24 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/main/res" >
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/main/res" >
             <file
                 name="loading"
-                path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/main/res/layout/loading.xml"
+                path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/main/res/layout/loading.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/main/res/values/strings.xml"
+                path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/main/res/values/strings.xml"
                 qualifiers="" >
                 <string name="loading" >Talking to Foursquare servers…
                 </string>
             </file>
         </source>
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/build/generated/res/rs/release" />
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/build/generated/res/generated/release" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/build/generated/res/rs/release" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/build/generated/res/generated/release" />
     </dataSet>
     <dataSet config="release" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/release/res" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/release/res" />
     </dataSet>
 
 </merger>

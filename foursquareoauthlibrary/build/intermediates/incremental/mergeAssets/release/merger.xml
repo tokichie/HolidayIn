@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/main/assets" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/main/assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="/Users/tokitake/AndroidStudioProjects/HolidayIn/foursquareoauthlibrary/src/release/assets" />
+        <source path="/Users/guest/Documents/repos/tokyo_smartphone1_C/foursquareoauthlibrary/src/release/assets" />
     </dataSet>
 
 </merger>

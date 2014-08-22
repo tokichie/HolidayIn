@@ -28,13 +28,43 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1.5">
+            android:layout_weight="1.5"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/textView_category" />
+                android:id="@+id/textView_category"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_genre"
+                android:src="@drawable/genre"
+                android:orientation="vertical"
+
+
+                 />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/train"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_train"
+                android:orientation="vertical"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/time"
+                android:id="@+id/imageView_time"
+                android:orientation="vertical"
+                />
+
+
         </LinearLayout>
     </LinearLayout>
 
