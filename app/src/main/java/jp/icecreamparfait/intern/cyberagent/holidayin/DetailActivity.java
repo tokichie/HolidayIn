@@ -8,7 +8,12 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.app.ActionBar;
+import android.net.Uri;
 import android.os.Bundle;
+
+import android.app.Activity;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,12 +31,11 @@ import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.PhotoItem;
 import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
-public class DetailActivity extends Activity implements LocationListener {
-
-    static List<Venue> dataList = new ArrayList<Venue>();
-    static VenueAdapter adapter;
+public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -41,9 +45,7 @@ public class DetailActivity extends Activity implements LocationListener {
         venueList = venues;
     }
 
-    private void setVenues(List<Venue> venues/*, List<PhotosGroup> photos*/) {
-        //List<Venue> venues = (List<Venue>) getIntent().getSerializableExtra("venue");
-
+    private void setVenues(List<Venue> venues) {
         VenueAdapter adapter = new VenueAdapter(this, 0, venues);
 
         ListView listView = (ListView) findViewById(R.id.listView_detail);
@@ -58,11 +60,28 @@ public class DetailActivity extends Activity implements LocationListener {
         locationManager.requestLocationUpdates(provider, 0L, 0f, this);
     }
 
+    private void setActionBar() {
+        // Set up the action bar.
+        final ActionBar actionBar = getActionBar();
+
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        actionBar.addTab(actionBar.newTab()
+                .setText("ページ１")
+                .setTabListener(new TabListener<Tab1Fragment>(
+                        this, "tag1", Tab1Fragment.class)));
+        actionBar.addTab(actionBar.newTab()
+                .setText("ページ２")
+                .setTabListener(new TabListener<Tab2Fragment>(
+                        this, "tag2", Tab2Fragment.class)));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        setActionBar();
         setLocationManager();
 
         EasyFoursquare efs = new EasyFoursquare(DetailActivity.this);
@@ -126,7 +145,6 @@ public class DetailActivity extends Activity implements LocationListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
@@ -161,6 +179,10 @@ public class DetailActivity extends Activity implements LocationListener {
 
     @Override
     public void onProviderDisabled(String s) {
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
