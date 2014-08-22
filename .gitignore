@@ -17,6 +17,9 @@ gen/
 # Gradle files
 .gradle/
 build/
+
+foursquareoauthlibrary/build/
+easyFoursquare4Android/build/
 /*/*/build
 /*/build
 */build/

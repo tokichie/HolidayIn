@@ -15,8 +15,26 @@ import android.widget.ListView;
 import java.util.List;
 
 import br.com.condesales.EasyFoursquare;
+import br.com.condesales.criterias.CheckInCriteria;
+import br.com.condesales.criterias.TrendingVenuesCriteria;
 import br.com.condesales.criterias.VenuesCriteria;
+import br.com.condesales.models.Checkin;
+import br.com.condesales.models.Score;
+import br.com.condesales.models.ScoreItem;
+import br.com.condesales.models.Statistics;
 import br.com.condesales.models.Venue;
+import fi.foyt.foursquare.api.FoursquareApi;
+import fi.foyt.foursquare.api.FoursquareApiException;
+import fi.foyt.foursquare.api.Result;
+import fi.foyt.foursquare.api.entities.CompactVenue;
+import fi.foyt.foursquare.api.entities.CompleteSpecial;
+import fi.foyt.foursquare.api.entities.CompleteTip;
+import fi.foyt.foursquare.api.entities.Stats;
+import fi.foyt.foursquare.api.entities.TipGroup;
+import fi.foyt.foursquare.api.entities.Tips;
+import fi.foyt.foursquare.api.entities.VenueGroup;
+import fi.foyt.foursquare.api.entities.VenuesSearchResult;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.MainActivity;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
@@ -82,9 +100,10 @@ public class Tab1Fragment extends Fragment {
 
         Bundle bundle = getArguments();
         String query = bundle.getString("param1");
-        Log.d("icecream", bundle.toString());
+        Log.d("icecream", query);
 
         List<Venue> venues = search(query);
+        //search2();
 
         Log.d("parfait", venues.toString());
 
@@ -111,7 +130,39 @@ public class Tab1Fragment extends Fragment {
 
         List<Venue> venues = efs.getVenuesNearby(vCriteria);
 
+
+        /*
+
+        CheckInCriteria ciCriteria = new CheckInCriteria();
+        ciCriteria.setVenueId(venues.get(0).getId());
+        ciCriteria.setLocation(loc);
+
+
+        Checkin checkin = efs.checkIn(ciCriteria);
+
+        Log.d("icecream", checkin.toString());
+
+        Score score = checkin.getScore();
+        List<ScoreItem> scoreItems = score.getScores();
+        Log.d("icecream", scoreItems.get(0).toString());
+        */
+
         return venues;
+    }
+
+    private void search2() {
+        FoursquareApi api = new FoursquareApi(MainActivity.CLIENT_ID, MainActivity.CLIENT_SECRET, MainActivity.REDIRECT_URL);
+        Result<VenuesSearchResult> result = null;
+        try {
+            result = api.venuesSearch("139.7069,35.6432", null, null, null, "ebisu", null, null, null, null, null, null);
+        } catch (FoursquareApiException e) {
+            e.printStackTrace();
+        }
+
+        CompactVenue[] venues = result.getResult().getVenues();
+        CompleteSpecial[] specials = venues[0].getSpecials();
+
+        Log.d("icecream", venues.toString());
     }
 
     // TODO: Rename method, update argument and hook method into UI event

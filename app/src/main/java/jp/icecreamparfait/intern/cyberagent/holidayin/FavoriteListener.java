@@ -8,6 +8,8 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.util.Log;
 
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
+
 
 public class FavoriteListener <T extends Fragment> implements ActionBar.TabListener {
     private Fragment mFragment;
