@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/container"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:layout_width="match_parent"
@@ -14,6 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView_detail" />
+
+    <!--Button
+        android:id="@+id/btnDisp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="他画面の起動"/-->
 
 
 </LinearLayout>

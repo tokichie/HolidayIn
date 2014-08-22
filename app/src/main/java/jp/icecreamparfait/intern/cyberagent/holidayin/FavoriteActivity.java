@@ -11,33 +11,31 @@ import android.location.LocationManager;
 import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
-import android.content.Intent;
-import android.app.Activity;
-import android.widget.Button;
+
+
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.view.View;
 
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
+
 import br.com.condesales.EasyFoursquare;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.PhotoItem;
 import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
-
-public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
+public class FavoriteActivity extends Activity implements Favorite1Fragment.OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -50,19 +48,9 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
     private void setVenues(List<Venue> venues) {
         VenueAdapter adapter = new VenueAdapter(this, 0, venues);
 
-        ListView listView = (ListView) findViewById(R.id.listView_detail);
+        ListView listView = (ListView) findViewById(R.id.listView_favorite);
         listView.setAdapter(adapter);
     }
-
-    /*Button btnDisp = (Button)findViewById(R.id.btnDisp);
-    btnDisp.setOnClickListener(new OnClickListener() {
-        public void onClick(View v) {
-            // Sub 画面を起動
-            Intent intent = new Intent();
-            intent.setClassName("jp.sample", "jp.sample.SubActivity");
-            startActivity(intent);
-        }
-    });*/
 
     private void setLocationManager() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -79,15 +67,14 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.addTab(actionBar.newTab()
-                .setText("お店")
+                .setText("ページ１")
                 .setTabListener(new TabListener<Tab1Fragment>(
                         this, "tag1", Tab1Fragment.class)));
         actionBar.addTab(actionBar.newTab()
-                .setText("お店のプラン")
+                .setText("ページ２")
                 .setTabListener(new TabListener<Tab2Fragment>(
                         this, "tag2", Tab2Fragment.class)));
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +84,7 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
         setActionBar();
         setLocationManager();
 
-        EasyFoursquare efs = new EasyFoursquare(DetailActivity.this);
+        EasyFoursquare efs = new EasyFoursquare(FavoriteActivity.this);
 
 
         Location loc = new Location("");
