@@ -2,9 +2,7 @@ package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,11 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.Venue;
+import java.sql.RowId;
 
 
 public class SearchActivity extends Activity {
@@ -36,8 +30,11 @@ public class SearchActivity extends Activity {
         adapter.add("2h");
         adapter.add("3h");
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
+        Spinner spinner_takingtime = (Spinner) findViewById(R.id.spinner_takingtime);
+        spinner_takingtime.setAdapter(adapter);
+
+        Spinner spinner_movingtime = (Spinner) findViewById(R.id.spinner_movingtime);
+        spinner_movingtime.setAdapter(adapter);
 
 
         Button button_search = (Button) findViewById(R.id.button_search);
@@ -47,6 +44,7 @@ public class SearchActivity extends Activity {
                 EditText editText_keyword = (EditText) findViewById(R.id.editText_keyword);
 
                 Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
+                //Intent intent = new Intent(SearchActivity.this, MyActivity.class);
                 String query = editText_keyword.getText().toString();
                 intent.putExtra("query", query);
                 startActivity(intent);
