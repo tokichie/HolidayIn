@@ -1,7 +1,6 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -11,43 +10,25 @@ import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.content.Intent;
-import android.app.Activity;
-import android.widget.Button;
-import android.util.Log;
 
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.view.View;
-
 
 import java.util.List;
 
+import br.com.condesales.EasyFoursquare;
+import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Venue;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Favorite1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import android.content.Intent;
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.PhotoItem;
-import br.com.condesales.models.PhotosGroup;
-import br.com.condesales.models.Venue;
 
-
-
-public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
+public class FavoriteActivity extends Activity implements Favorite1Fragment.OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -60,19 +41,9 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
     private void setVenues(List<Venue> venues) {
         VenueAdapter adapter = new VenueAdapter(this, 0, venues);
 
-        ListView listView = (ListView) findViewById(R.id.listView_detail);
+        ListView listView = (ListView) findViewById(R.id.listView_favorite);
         listView.setAdapter(adapter);
     }
-
-    /*Button btnDisp = (Button)findViewById(R.id.btnDisp);
-    btnDisp.setOnClickListener(new OnClickListener() {
-        public void onClick(View v) {
-            // Sub 画面を起動
-            Intent intent = new Intent();
-            intent.setClassName("jp.sample", "jp.sample.SubActivity");
-            startActivity(intent);
-        }
-    });*/
 
     private void setLocationManager() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -88,33 +59,15 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ActionBar.Tab tab1 = actionBar.newTab().setText("スポット");
-        ActionBar.Tab tab2 = actionBar.newTab().setText("プラン");
-
-        Fragment fragment_tab1 = new Tab1Fragment();
-        Fragment fragment_tab2 = new Tab2Fragment();
-
-        Bundle data = new Bundle();
-        data.putString("query", getIntent().getExtras().getString("query"));
-        fragment_tab1.setArguments(data);
-
-        tab1.setTabListener(new TabListener<Tab1Fragment>(this, "tab_spot", Tab1Fragment.class));
-        tab2.setTabListener(new TabListener<Tab2Fragment>(this, "tab_plan", Tab2Fragment.class));
-
-        actionBar.addTab(tab1);
-        actionBar.addTab(tab2);
-        /*
         actionBar.addTab(actionBar.newTab()
-                .setText("お店")
+                .setText("ページ１")
                 .setTabListener(new TabListener<Tab1Fragment>(
                         this, "tag1", Tab1Fragment.class)));
         actionBar.addTab(actionBar.newTab()
-                .setText("お店のプラン")
+                .setText("ページ２")
                 .setTabListener(new TabListener<Tab2Fragment>(
                         this, "tag2", Tab2Fragment.class)));
-                        */
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,10 +76,8 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
 
         setActionBar();
         setLocationManager();
-/*
-        EasyFoursquare efs = new EasyFoursquare(DetailActivity.this);
 
-        String query = getIntent().getExtras().getString("query");
+        EasyFoursquare efs = new EasyFoursquare(FavoriteActivity.this);
 
 
         Location loc = new Location("");
@@ -136,12 +87,10 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
         VenuesCriteria vCriteria = new VenuesCriteria();
         vCriteria.setQuantity(10);
         vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-        vCriteria.setQuery(query);
+        vCriteria.setQuery(getIntent().getExtras().getString("query"));
         vCriteria.setLocation(loc);
 
         List<Venue> venues = efs.getVenuesNearby(vCriteria);
-        Log.d("icecream", venues.toString());
-        */
 
         /*
         List<Integer> counts = new ArrayList<Integer>();
@@ -181,8 +130,9 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
             item.
             photos.add(photo);
         }*/
+        Log.d("Icecream", venues.toString());
 
-        //setVenues(venues);
+        setVenues(venues);
     }
 
 
