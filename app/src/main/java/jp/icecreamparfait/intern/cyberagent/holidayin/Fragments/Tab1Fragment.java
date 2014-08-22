@@ -1,15 +1,24 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
 
 
 import android.app.Activity;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import java.util.List;
 
+import br.com.condesales.EasyFoursquare;
+import br.com.condesales.criterias.VenuesCriteria;
+import br.com.condesales.models.Venue;
+import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
 /**
@@ -23,9 +32,6 @@ import android.view.ViewGroup;
  */
 public class Tab1Fragment extends Fragment {
 
-
-
-        // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -33,6 +39,8 @@ public class Tab1Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private List<Venue> mVenues;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,7 +52,7 @@ public class Tab1Fragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment Tab1Fragment.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Tab1Fragment newInstance(String param1, String param2) {
         Tab1Fragment fragment = new Tab1Fragment();
         Bundle args = new Bundle();
@@ -53,6 +61,7 @@ public class Tab1Fragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public Tab1Fragment() {
         // Required empty public constructor
     }
@@ -69,8 +78,40 @@ public class Tab1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab1, container, false);
+        View v = inflater.inflate(R.layout.fragment_tab1, container, false);
+
+        Bundle bundle = getArguments();
+        String query = bundle.getString("param1");
+        Log.d("icecream", bundle.toString());
+
+        List<Venue> venues = search(query);
+
+        Log.d("parfait", venues.toString());
+
+        VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
+
+        ListView listView = (ListView) v.findViewById(R.id.listView_detail);
+        listView.setAdapter(adapter);
+
+        return v;
+    }
+
+    private List<Venue> search(String query) {
+        EasyFoursquare efs = new EasyFoursquare(getActivity());
+
+        Location loc = new Location("");
+        loc.setLongitude(139.7069874);
+        loc.setLatitude(35.6432274);
+
+        VenuesCriteria vCriteria = new VenuesCriteria();
+        vCriteria.setQuantity(10);
+        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        vCriteria.setQuery(query);
+        vCriteria.setLocation(loc);
+
+        List<Venue> venues = efs.getVenuesNearby(vCriteria);
+
+        return venues;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,6 +130,7 @@ public class Tab1Fragment extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
     }
 
     @Override

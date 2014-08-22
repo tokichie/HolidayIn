@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.sql.RowId;
+import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 
 
 public class SearchActivity extends Activity {

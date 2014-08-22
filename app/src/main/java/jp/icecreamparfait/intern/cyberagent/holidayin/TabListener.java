@@ -6,7 +6,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 
 
 public class TabListener<T extends Fragment> implements ActionBar.TabListener {
@@ -33,22 +36,30 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
      * @brief タブが選択されたときの処理
      */
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
+
+        FragmentManager fm = mActivity.getFragmentManager();
+        ft = fm.beginTransaction();
+
         //ftはnullなので使用できない
         if (mFragment == null) {
-            //mFragment = Fragment.instantiate(mActivity, mClass.getName());
-            mFragment = Tab1Fragment.newInstance("", "");
-            FragmentManager fm = mActivity.getFragmentManager();
-            fm.beginTransaction().add(R.id.container, mFragment, mTag).commit();
+
+            if (mTag == "tab_spot") {
+                //mFragment = Fragment.instantiate(mActivity, mClass.getName());
+                mFragment = Tab1Fragment.newInstance("えびす", "");
+            } else if (mTag == "tab_plan") {
+                mFragment = Tab2Fragment.newInstance("", "");
+            }
+
+            ft.add(R.id.container, mFragment, mTag);
+
         } else {
             //detachされていないときだけattachするよう変更   2012/12/11　変更
-            //FragmentManager fm = mActivity.getFragmentManager();
-            //fm.beginTransaction().attach(mFragment).commit();
             if (mFragment.isDetached()) {
-                FragmentManager fm = mActivity.getFragmentManager();
-                fm.beginTransaction().attach(mFragment).commit();
+                ft.attach(mFragment);
             }
 
         }
+        ft.commit();
     }
     /**
      * @brief 　タブの選択が解除されたときの処理

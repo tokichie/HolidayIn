@@ -17,6 +17,10 @@ gen/
 # Gradle files
 .gradle/
 build/
+/*/*/build
+/*/build
+*/build/
+build
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -45,4 +49,11 @@ hs_err_pid*
 
 
 .DS_Store
-.idea/*
+.idea/
+*.iml
+*.iws
+*.ipr
+local.properties
+
+*~
+*.swp
