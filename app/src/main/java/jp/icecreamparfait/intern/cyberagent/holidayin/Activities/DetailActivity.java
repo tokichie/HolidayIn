@@ -65,7 +65,7 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
         final ActionBar actionBar = getActionBar();
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+        actionBar.setTitle("検索結果");
         ActionBar.Tab tab1 = actionBar.newTab().setText("スポット");
         ActionBar.Tab tab2 = actionBar.newTab().setText("プラン");
 
