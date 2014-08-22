@@ -3,6 +3,7 @@ package br.com.condesales.tasks.venues;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -79,6 +80,7 @@ public class FoursquareVenueDetailsRequest extends
                 JSONObject json = venuesJson.getJSONObject("response")
                         .getJSONObject("venue");
                 venue = gson.fromJson(json.toString(), Venue.class);
+                Log.d("4sq", json.toString());
             } else {
                 if (mListener != null)
                     mListener.onError(venuesJson.getJSONObject("meta")

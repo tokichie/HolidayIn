@@ -4,69 +4,102 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView_title" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/imageView_photo"
             android:src="@drawable/noimage"
-            android:layout_weight="1"
-            android:adjustViewBounds="false" />
+            android:adjustViewBounds="false"
+            android:layout_margin="7dp" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1.5"
-            android:weightSum="1">
+            android:layout_width="fill_parent">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView_category"
-                />
+                android:text="Large Text"
+                android:id="@+id/textView_title"
+                android:textSize="16sp"
+                android:layout_marginTop="7dp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView_genre"
-                android:src="@drawable/genre"
-                android:orientation="vertical"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_genre"
+                    android:src="@drawable/genre"
+                    android:orientation="vertical"/>
 
-                 />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:src="@drawable/train"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView_train"
-                android:orientation="vertical"
-                />
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/textView_category"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/time"
-                android:id="@+id/imageView_time"
-                android:orientation="vertical"
-                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/train"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_train"
+                    android:orientation="vertical"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"></LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/time"
+                    android:id="@+id/imageView_time"
+                    android:orientation="vertical"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"></LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/item_shadow"></LinearLayout>
 
 
 </LinearLayout>

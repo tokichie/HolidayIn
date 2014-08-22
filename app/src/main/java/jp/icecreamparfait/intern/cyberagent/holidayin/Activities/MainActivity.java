@@ -28,12 +28,12 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.TokenStore;
 
 public class MainActivity extends Activity {
 
-    private static final int REQUEST_CODE_FSQ_CONNECT = 200;
-    private static final int REQUEST_CODE_FSQ_TOKEN_EXCHANGE = 201;
-    private static final String DEFAULT_VERSION_DATE = "20140820";
-    private static final String CLIENT_ID = "UJ4ENP0LIKT3EQNUVVLQXFTKNUTWZZSF5BB0YFHVX3NA1WNM";
-    private static final String CLIENT_SECRET = "I3OIFOA0KGRLH5UTR2WSKXEMW2JLYG20NOVXX0PATFELX3P4";
-    private static final String REDIRECT_URL = "https://github.com/techcampman/tokyo_smartphone1_C";
+    public static final int REQUEST_CODE_FSQ_CONNECT = 200;
+    public static final int REQUEST_CODE_FSQ_TOKEN_EXCHANGE = 201;
+    public static final String DEFAULT_VERSION_DATE = "20140820";
+    public static final String CLIENT_ID = "UJ4ENP0LIKT3EQNUVVLQXFTKNUTWZZSF5BB0YFHVX3NA1WNM";
+    public static final String CLIENT_SECRET = "I3OIFOA0KGRLH5UTR2WSKXEMW2JLYG20NOVXX0PATFELX3P4";
+    public static final String REDIRECT_URL = "https://github.com/techcampman/tokyo_smartphone1_C";
 
 
     @Override

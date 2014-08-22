@@ -1,5 +1,6 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -7,43 +8,20 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
-
-import android.content.Intent;
-import android.app.Activity;
-import android.widget.Button;
-import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.view.View;
-
 
 import java.util.List;
 
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
-
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import android.content.Intent;
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.PhotoItem;
-import br.com.condesales.models.PhotosGroup;
-import br.com.condesales.models.Venue;
 
 
 

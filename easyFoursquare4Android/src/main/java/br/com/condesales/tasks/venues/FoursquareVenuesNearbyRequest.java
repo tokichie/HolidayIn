@@ -84,7 +84,8 @@ public class FoursquareVenuesNearbyRequest extends
                     + "&intent="
                     + mCriteria.getIntent().getValue()
                     + "&radius="
-                    + mCriteria.getRadius();
+                    + mCriteria.getRadius()
+                    + "&locale=ja";
             if (!access_token.equals("")) {
                 uri = uri + "&oauth_token=" + access_token;
             } else {

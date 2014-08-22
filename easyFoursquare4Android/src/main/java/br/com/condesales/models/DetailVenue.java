@@ -2,7 +2,7 @@ package br.com.condesales.models;
 
 import java.util.ArrayList;
 
-public class Venue {
+public class DetailVenue {
 
 	private String id;
 
@@ -23,8 +23,6 @@ public class Venue {
 	private long createdAt;
 
 	private Mayor mayor;
-
-    private String rating;
 
 	private String timeZone;
 
@@ -49,8 +47,6 @@ public class Venue {
 	public String getShortUrl() {
 		return shortUrl;
 	}
-
-    public String getRating() {return rating;}
 
 	public boolean isDislike() {
 		return dislike;

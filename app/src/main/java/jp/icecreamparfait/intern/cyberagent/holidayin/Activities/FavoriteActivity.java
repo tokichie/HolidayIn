@@ -1,17 +1,14 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.app.ActionBar;
 import android.net.Uri;
 import android.os.Bundle;
-
-
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;

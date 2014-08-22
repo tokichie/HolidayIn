@@ -137,9 +137,19 @@ public class EasyFoursquare {
     }
 
 
-    public void getVenueDetail(String venueID) {
+    public Venue getVenueDetail(String venueID) {
         FoursquareVenueDetailsRequest request = new FoursquareVenueDetailsRequest(mActivity, venueID);
         request.execute(getAccessToken());
+
+        Venue venue = new Venue();
+        try {
+            venue = request.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return venue;
     }
 
     /**
