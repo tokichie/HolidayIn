@@ -18,13 +18,6 @@ gen/
 .gradle/
 build/
 
-foursquareoauthlibrary/build/
-easyFoursquare4Android/build/
-/*/*/build
-/*/build
-*/build/
-build
-
 # Local configuration file (sdk path, etc)
 local.properties
 
