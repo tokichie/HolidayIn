@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
                 final Intent intent = FoursquareOAuth.getConnectIntent(MainActivity.this, CLIENT_ID);
 
                 if (FoursquareOAuth.isPlayStoreIntent(intent)) {
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setMessage("Foursquareのアプリをインストールする必要があります。アプリのページに移動しますか？");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -79,6 +81,8 @@ public class MainActivity extends Activity {
                             return;
                         }
                     });
+                    builder.show();
+
                 } else {
                     startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT);
                 }
@@ -148,14 +152,13 @@ public class MainActivity extends Activity {
         if (exception == null) {
             String accessToken = tokenResponse.getAccessToken();
             // Success.
-            toastMessage(this, "Access token: " + accessToken);
+            toastMessage(this, "Access token: " + accessToken + "\n\n正常にログインしました。");
 
             // Persist the token for later use. In this example, we save
             // it to shared prefs.
             TokenStore.get().setToken(accessToken);
 
-            // Refresh UI.
-            ensureUi();
+            startSearchActivity();;
 
         } else {
             if (exception instanceof FoursquareOAuthException) {
