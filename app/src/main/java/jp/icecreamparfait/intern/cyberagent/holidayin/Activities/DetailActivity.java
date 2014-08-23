@@ -24,9 +24,9 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
-
 public class DetailActivity extends Activity implements
         Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener, LocationListener {
+
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -210,3 +210,6 @@ public class DetailActivity extends Activity implements
 
     }
 }
+
+
+
