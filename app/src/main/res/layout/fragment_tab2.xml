@@ -5,9 +5,15 @@
     tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="プランを提案します" />
+        android:text="プランを提案します" /-->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_detail"
+        android:divider="#ccc"
+        android:dividerHeight="10.0dp"/>
 
 </FrameLayout>

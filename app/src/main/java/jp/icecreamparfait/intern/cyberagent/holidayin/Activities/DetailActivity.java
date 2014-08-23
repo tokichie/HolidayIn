@@ -45,9 +45,10 @@ import br.com.condesales.models.PhotoItem;
 import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
 
+import static jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment.OnFragmentInteractionListener;
 
 
-public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
+public class DetailActivity extends Activity implements OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -229,3 +230,6 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
 
     }
 }
+
+
+

@@ -1,14 +1,23 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
 
 import android.app.Activity;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import java.util.List;
+
+import br.com.condesales.EasyFoursquare;
+import br.com.condesales.criterias.VenuesCriteria;
+import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
 /**
@@ -66,8 +75,63 @@ public class Tab2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab2, container, false);
+        View v = inflater.inflate(R.layout.fragment_tab2, container, false);
+
+        Bundle bundle = getArguments();
+        String query = bundle.getString("param1");
+        Log.d("icecream", query);
+
+        List<Venue> venues = search(query);
+        //search2();
+
+        Log.d("parfait", venues.toString());
+
+        VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
+
+
+        ListView listView = (ListView) v.findViewById(R.id.listView_detail);
+        listView.setAdapter(adapter);
+
+        return v;
+
+
     }
+
+    private List<Venue> search(String query) {
+        EasyFoursquare efs = new EasyFoursquare(getActivity());
+
+        Location loc = new Location("");
+        loc.setLongitude(139.7069874);
+        loc.setLatitude(35.6432274);
+
+        VenuesCriteria vCriteria = new VenuesCriteria();
+        vCriteria.setQuantity(10);
+        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        vCriteria.setQuery(query);
+        vCriteria.setLocation(loc);
+
+        List<Venue> venues = efs.getVenuesNearby(vCriteria);
+
+
+        /*
+
+        CheckInCriteria ciCriteria = new CheckInCriteria();
+        ciCriteria.setVenueId(venues.get(0).getId());
+        ciCriteria.setLocation(loc);
+
+
+        Checkin checkin = efs.checkIn(ciCriteria);
+
+        Log.d("icecream", checkin.toString());
+
+        Score score = checkin.getScore();
+        List<ScoreItem> scoreItems = score.getScores();
+        Log.d("icecream", scoreItems.get(0).toString());
+        */
+
+        return venues;
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
