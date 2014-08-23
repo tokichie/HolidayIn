@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.condesales.EasyFoursquare;
+import br.com.condesales.EasyFoursquareAsync;
+import br.com.condesales.listeners.VenuePhotosListener;
 import br.com.condesales.models.Category;
 import br.com.condesales.models.PhotoItem;
 import br.com.condesales.models.PhotosGroup;
@@ -57,18 +59,27 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
         textView_category = (TextView) convertView.findViewById(R.id.textView_category);
         textView_category.setText(category);
 
-        ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
+        final ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
 
-        EasyFoursquare api = new EasyFoursquare(mActivity);
-        PhotosGroup photosGroup = api.getVenuePhotos(venue.getId());
-        if (photosGroup.getCount() > 0) {
-            List<PhotoItem> photoItems = photosGroup.getItems();
-            String prefix = photoItems.get(0).getPrefix();
-            String suffix = photoItems.get(0).getSuffix();
+        EasyFoursquareAsync api = new EasyFoursquareAsync(mActivity);
+        api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
+            @Override
+            public void onGotVenuePhotos(PhotosGroup photosGroup) {
+                if (photosGroup.getCount() > 0) {
+                    List<PhotoItem> photoItems = photosGroup.getItems();
+                    String prefix = photoItems.get(0).getPrefix();
+                    String suffix = photoItems.get(0).getSuffix();
 
-            PhotoGetter getter = new PhotoGetter(imageView_photo);
-            getter.execute(prefix + "200x200" + suffix);
-        }
+                    PhotoGetter getter = new PhotoGetter(imageView_photo);
+                    getter.execute(prefix + "200x200" + suffix);
+                }
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+
+            }
+        });
 
 
         return convertView;

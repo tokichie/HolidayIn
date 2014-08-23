@@ -59,94 +59,70 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
  */
 public class Tab1Fragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private boolean isFinished;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private List<Venue> mVenues;
 
     private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Tab1Fragment.
-     */
-
-    public static Tab1Fragment newInstance(String param1, String param2) {
-        Tab1Fragment fragment = new Tab1Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public Tab1Fragment() {
         // Required empty public constructor
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            isFinished = getArguments().getBoolean("finished");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_tab1, container, false);
 
-        Bundle bundle = getArguments();
-        String query = "ebisu";//bundle.getString("param1");
-//        Log.d("icecream", query);
+        Log.d("icecream", String.valueOf(container.getId()));
+        View v = inflater.inflate(R.layout.fragment_tab1_loading, container, false);
+        if (isFinished) {
+            Log.d("icecream", "finished");
+            v = inflater.inflate(R.layout.fragment_tab1, container, false);
+            List<Venue> venues = ResultStore.get().getResult();
 
-        List<Venue> venues = search(query, v);
-//        List<Venue> venues = ResultStore.get().getResult();
 
+            VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
 
-        VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
-
-        ListView listView = (ListView) v.findViewById(R.id.listView_detail);
-        listView.setAdapter(adapter);
+            ListView listView = (ListView) v.findViewById(R.id.listView_detail);
+            listView.setAdapter(adapter);
+        }
+//        List<Venue> venues = search(query, v);
 
         return v;
     }
 
-    private List<Venue> search(String query, View v) {
-        EasyFoursquare efs = new EasyFoursquare(getActivity());
-
-        Location loc = new Location("");
-        loc.setLongitude(139.7069874);
-        loc.setLatitude(35.6432274);
-
-        VenuesCriteria vCriteria = new VenuesCriteria();
-        vCriteria.setQuantity(10);
-        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-        vCriteria.setQuery(query);
-        vCriteria.setLocation(loc);
-
-        List<Venue> venues = efs.getVenuesNearby(vCriteria);
-
-        TipsGroup tipsGroup = efs.getVenueTips(venues.get(0).getId());
-        List<TipItem> tipItems = tipsGroup.getItems();
-        TipItem tipItem = tipItems.get(0);
-
-
-
-
-        return venues;
-    }
+//    private List<Venue> search(String query, View v) {
+//        EasyFoursquare efs = new EasyFoursquare(getActivity());
+//
+//        Location loc = new Location("");
+//        loc.setLongitude(139.7069874);
+//        loc.setLatitude(35.6432274);
+//
+//        VenuesCriteria vCriteria = new VenuesCriteria();
+//        vCriteria.setQuantity(10);
+//        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+//        vCriteria.setQuery(query);
+//        vCriteria.setLocation(loc);
+//
+//        List<Venue> venues = efs.getVenuesNearby(vCriteria);
+//
+//        TipsGroup tipsGroup = efs.getVenueTips(venues.get(0).getId());
+//        List<TipItem> tipItems = tipsGroup.getItems();
+//        TipItem tipItem = tipItems.get(0);
+//
+//
+//
+//
+//        return venues;
+//    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

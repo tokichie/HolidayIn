@@ -10,4 +10,10 @@
         android:id="@+id/listView_detail"
         android:divider="#ccc"
         android:dividerHeight="10.0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finished"
+        android:id="@+id/textView" />
 </FrameLayout>

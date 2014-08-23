@@ -84,8 +84,6 @@ public class Tab2Fragment extends Fragment {
         List<Venue> venues = search(query);
         //search2();
 
-        Log.d("parfait", venues.toString());
-
         VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
 
 

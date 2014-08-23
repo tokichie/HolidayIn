@@ -38,7 +38,7 @@ public class FavoriteListener <T extends Fragment> implements ActionBar.TabListe
         //ftはnullなので使用できない
         if (mFragment == null) {
             //mFragment = Fragment.instantiate(mActivity, mClass.getName());
-            mFragment = Tab1Fragment.newInstance("", "");
+            mFragment = new Tab1Fragment();
             FragmentManager fm = mActivity.getFragmentManager();
             fm.beginTransaction().add(R.id.container, mFragment, mTag).commit();
         } else {

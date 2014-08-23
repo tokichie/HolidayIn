@@ -3,6 +3,7 @@ package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
@@ -12,11 +13,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import br.com.condesales.EasyFoursquareAsync;
+import br.com.condesales.criterias.VenuesCriteria;
+import br.com.condesales.listeners.FoursquareVenuesRequestListener;
 import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.AsyncCallback;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
@@ -35,6 +41,7 @@ public class DetailActivity extends Activity implements
     private double mLatitude;
     private double mLongitude;
 
+    private Fragment fragment_tab1;
 
     private void setLocationManager() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -53,12 +60,12 @@ public class DetailActivity extends Activity implements
         ActionBar.Tab tab1 = actionBar.newTab().setText("スポット");
         ActionBar.Tab tab2 = actionBar.newTab().setText("プラン");
 
-        Fragment fragment_tab1 = new Tab1Fragment();
+        fragment_tab1 = new Tab1Fragment();
         Fragment fragment_tab2 = new Tab2Fragment();
 
-        Bundle data = new Bundle();
-        data.putString("query", getIntent().getExtras().getString("query"));
-        fragment_tab1.setArguments(data);
+//        Bundle data = new Bundle();
+//        data.putString("query", getIntent().getExtras().getString("query"));
+//        fragment_tab1.setArguments(data);
 
         tab1.setTabListener(new MyTabListener(fragment_tab1));
         tab2.setTabListener(new MyTabListener(fragment_tab2));
@@ -72,6 +79,38 @@ public class DetailActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        EasyFoursquareAsync api = new EasyFoursquareAsync(this);
+        Location loc = new Location("");
+        loc.setLongitude(139.7069874);
+        loc.setLatitude(35.6432274);
+
+        VenuesCriteria vCriteria = new VenuesCriteria();
+        vCriteria.setQuantity(10);
+        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        vCriteria.setQuery("shibuya");
+        vCriteria.setLocation(loc);
+        api.getVenuesNearby(new FoursquareVenuesRequestListener() {
+            @Override
+            public void onVenuesFetched(ArrayList<Venue> venues) {
+                ResultStore.get().setResult(venues);
+                fragment_tab1 = new Tab1Fragment();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("finished", true);
+                fragment_tab1.setArguments(bundle);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, fragment_tab1);
+                ft.commit();
+                //fragment_tab1.onCreateView(getLayoutInflater(), (ViewGroup)findViewById(R.id.container), bundle);
+
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+
+            }
+        }, vCriteria);
 
 //        Searcher searcher = new Searcher(this, new AsyncCallback() {
 //            @Override

@@ -4,6 +4,8 @@ package br.com.condesales;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
+import java.util.concurrent.ExecutionException;
+
 import br.com.condesales.constants.FoursquareConstants;
 import br.com.condesales.criterias.CheckInCriteria;
 import br.com.condesales.criterias.TipsCriteria;
@@ -18,7 +20,9 @@ import br.com.condesales.listeners.FriendsListener;
 import br.com.condesales.listeners.GetCheckInsListener;
 import br.com.condesales.listeners.TipsRequestListener;
 import br.com.condesales.listeners.UserInfoRequestListener;
+import br.com.condesales.listeners.VenuePhotosListener;
 import br.com.condesales.listeners.VenuesHistoryListener;
+import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.tasks.checkins.CheckInRequest;
 import br.com.condesales.tasks.tips.TipsNearbyRequest;
 import br.com.condesales.tasks.users.GetCheckInsRequest;
@@ -28,6 +32,7 @@ import br.com.condesales.tasks.users.SelfInfoRequest;
 import br.com.condesales.tasks.venues.FoursquareTrendingVenuesNearbyRequest;
 import br.com.condesales.tasks.venues.FoursquareVenueDetailsRequest;
 import br.com.condesales.tasks.venues.FoursquareVenuesNearbyRequest;
+import br.com.condesales.tasks.venues.GetVenuePhotosRequest;
 
 /**
  * Class to handle methods used to perform requests to FoursquareAPI and respond
@@ -171,12 +176,13 @@ public class EasyFoursquareAsync {
         request.execute(getAccessToken());
     }
 
-    /*
+
     public void getVenuePhotos(String venueID, VenuePhotosListener listener) {
         GetVenuePhotosRequest request = new GetVenuePhotosRequest(mActivity, listener, venueID);
         request.execute(getAccessToken());
+
     }
-    */
+
 
     private boolean hasAccessToken() {
         String token = getAccessToken();
