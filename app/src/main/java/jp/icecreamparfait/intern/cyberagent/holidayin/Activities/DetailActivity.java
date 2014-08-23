@@ -23,9 +23,10 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
+import static jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment.OnFragmentInteractionListener;
 
 
-public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
+public class DetailActivity extends Activity implements OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -207,3 +208,6 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
 
     }
 }
+
+
+
