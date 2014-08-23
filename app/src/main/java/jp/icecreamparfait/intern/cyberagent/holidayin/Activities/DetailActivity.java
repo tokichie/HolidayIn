@@ -19,13 +19,14 @@ import java.util.List;
 import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
 
-public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentInteractionListener, LocationListener {
+public class DetailActivity extends Activity implements
+        Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener, LocationListener {
 
     private List<Venue> venueList;
     private double mLatitude;
@@ -76,8 +77,10 @@ public class DetailActivity extends Activity implements Tab1Fragment.OnFragmentI
         data.putString("query", getIntent().getExtras().getString("query"));
         fragment_tab1.setArguments(data);
 
-        tab1.setTabListener(new TabListener<Tab1Fragment>(this, "tab_spot", Tab1Fragment.class));
-        tab2.setTabListener(new TabListener<Tab2Fragment>(this, "tab_plan", Tab2Fragment.class));
+//        tab1.setTabListener(new MyTabListener<Tab1Fragment>(this, "tab_spot", Tab1Fragment.class));
+//        tab2.setTabListener(new MyTabListener<Tab2Fragment>(this, "tab_plan", Tab2Fragment.class));
+        tab1.setTabListener(new MyTabListener(fragment_tab1));
+        tab2.setTabListener(new MyTabListener(fragment_tab2));
 
         actionBar.addTab(tab1);
         actionBar.addTab(tab2);
