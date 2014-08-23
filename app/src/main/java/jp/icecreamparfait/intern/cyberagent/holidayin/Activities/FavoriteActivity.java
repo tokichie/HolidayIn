@@ -22,8 +22,8 @@ import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Favorite1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.TabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
@@ -52,28 +52,28 @@ public class FavoriteActivity extends Activity implements Favorite1Fragment.OnFr
         locationManager.requestLocationUpdates(provider, 0L, 0f, this);
     }
 
-    private void setActionBar() {
-        // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
-
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        actionBar.addTab(actionBar.newTab()
-                .setText("ページ１")
-                .setTabListener(new TabListener<Tab1Fragment>(
-                        this, "tag1", Tab1Fragment.class)));
-        actionBar.addTab(actionBar.newTab()
-                .setText("ページ２")
-                .setTabListener(new TabListener<Tab2Fragment>(
-                        this, "tag2", Tab2Fragment.class)));
-    }
+//    private void setActionBar() {
+//        // Set up the action bar.
+//        final ActionBar actionBar = getActionBar();
+//
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//
+//        actionBar.addTab(actionBar.newTab()
+//                .setText("ページ１")
+//                .setTabListener(new MyTabListener<Tab1Fragment>(
+//                        this, "tag1", Tab1Fragment.class)));
+//        actionBar.addTab(actionBar.newTab()
+//                .setText("ページ２")
+//                .setTabListener(new MyTabListener<Tab2Fragment>(
+//                        this, "tag2", Tab2Fragment.class)));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        setActionBar();
+        //setActionBar();
         setLocationManager();
 
         EasyFoursquare efs = new EasyFoursquare(FavoriteActivity.this);
