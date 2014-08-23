@@ -48,6 +48,8 @@ public class EasyFoursquare {
     public EasyFoursquare(Activity activity) {
         mActivity = activity;
     }
+    public EasyFoursquare() {}
+
 
     /**
      * Requests the access to API

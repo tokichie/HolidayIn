@@ -15,12 +15,16 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import br.com.condesales.models.Venue;
+import jp.icecreamparfait.intern.cyberagent.holidayin.AsyncCallback;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Searcher;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 import static jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment.OnFragmentInteractionListener;
@@ -28,30 +32,9 @@ import static jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragm
 public class DetailActivity extends Activity implements
         Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener, LocationListener {
 
-    private List<Venue> venueList;
     private double mLatitude;
     private double mLongitude;
 
-    public void setVenueList(List<Venue> venues) {
-        venueList = venues;
-    }
-
-    private void setVenues(List<Venue> venues) {
-        VenueAdapter adapter = new VenueAdapter(this, 0, venues);
-
-        ListView listView = (ListView) findViewById(R.id.listView_detail);
-        listView.setAdapter(adapter);
-    }
-
-    /*Button btnDisp = (Button)findViewById(R.id.btnDisp);
-    btnDisp.setOnClickListener(new OnClickListener() {
-        public void onClick(View v) {
-            // Sub 画面を起動
-            Intent intent = new Intent();
-            intent.setClassName("jp.sample", "jp.sample.SubActivity");
-            startActivity(intent);
-        }
-    });*/
 
     private void setLocationManager() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -77,23 +60,11 @@ public class DetailActivity extends Activity implements
         data.putString("query", getIntent().getExtras().getString("query"));
         fragment_tab1.setArguments(data);
 
-//        tab1.setTabListener(new MyTabListener<Tab1Fragment>(this, "tab_spot", Tab1Fragment.class));
-//        tab2.setTabListener(new MyTabListener<Tab2Fragment>(this, "tab_plan", Tab2Fragment.class));
         tab1.setTabListener(new MyTabListener(fragment_tab1));
         tab2.setTabListener(new MyTabListener(fragment_tab2));
 
         actionBar.addTab(tab1);
         actionBar.addTab(tab2);
-        /*
-        actionBar.addTab(actionBar.newTab()
-                .setText("お店")
-                .setTabListener(new TabListener<Tab1Fragment>(
-                        this, "tag1", Tab1Fragment.class)));
-        actionBar.addTab(actionBar.newTab()
-                .setText("お店のプラン")
-                .setTabListener(new TabListener<Tab2Fragment>(
-                        this, "tag2", Tab2Fragment.class)));
-                        */
     }
 
 
@@ -102,68 +73,42 @@ public class DetailActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+//        Searcher searcher = new Searcher(this, new AsyncCallback() {
+//            @Override
+//            public void onPreExecute() {
+//
+//            }
+//
+//            @Override
+//            public void onPostExecute(List<Venue> result) {
+//                ResultStore.get().setResult(result);
+//            }
+//
+//            @Override
+//            public void onProgressUpdate(int progress) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled() {
+//
+//            }
+//        });
+//        searcher.execute(ResultStore.get().getQuery());
+
+//        List<Venue> venues = null;
+//        try {
+//            venues = searcher.get();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
+//        ResultStore.get().setResult(venues);
+
+
         setActionBar();
         setLocationManager();
-/*
-        EasyFoursquare efs = new EasyFoursquare(DetailActivity.this);
-
-        String query = getIntent().getExtras().getString("query");
-
-
-        Location loc = new Location("");
-        loc.setLongitude(139.7069874);
-        loc.setLatitude(35.6432274);
-
-        VenuesCriteria vCriteria = new VenuesCriteria();
-        vCriteria.setQuantity(10);
-        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-        vCriteria.setQuery(query);
-        vCriteria.setLocation(loc);
-
-        List<Venue> venues = efs.getVenuesNearby(vCriteria);
-        Log.d("icecream", venues.toString());
-        */
-
-        /*
-        List<Integer> counts = new ArrayList<Integer>();
-        for (Venue venue: venues) {
-            PhotosGroup pg = efs.getVenuePhotos(venue.getId());
-            counts.add(pg.getCount());
-        }
-        Log.d("icecream", counts.toString());
-        */
-
-        /*
-        Venue aVenue = venues.get(1);
-        PhotosGroup photos = efs.getVenuePhotos(aVenue.getId());
-        if (photos.getCount() > 0) {
-            List<PhotoItem> items = photos.getItems();
-            PhotoItem item = items.get(0);
-            try {
-                URL url = new URL(item.getPrefix() + "200x200" +  item.getSuffix());
-                Log.d("icecream", url.toString());
-                InputStream istream = url.openStream();
-                Bitmap bmp = BitmapFactory.decodeStream(istream);
-                ImageView view = (ImageView) findViewById(R.id.imageView_detail);
-                //view.setImageBitmap(bmp);
-                istream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        */
-
-        /*
-        List<PhotoItem> photos = new ArrayList<PhotosItem>();
-        for (Venue venue: venues) {
-            PhotosGroup photo = efs.getVenuePhotos(venue.getId());
-            List<PhotoItem> photoItems = photo.getItems();
-            PhotoItem item = photoItems.get(0);
-            item.
-            photos.add(photo);
-        }*/
-
-        //setVenues(venues);
     }
 
 

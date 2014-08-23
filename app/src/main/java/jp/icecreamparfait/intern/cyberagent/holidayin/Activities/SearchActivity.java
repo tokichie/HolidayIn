@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 
 
 public class SearchActivity extends Activity {
@@ -46,6 +47,7 @@ public class SearchActivity extends Activity {
                 Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
                 //Intent intent = new Intent(SearchActivity.this, MyActivity.class);
                 String query = editText_keyword.getText().toString();
+                ResultStore.get().setQuery(query);
                 intent.putExtra("query", query);
                 startActivity(intent);
             }

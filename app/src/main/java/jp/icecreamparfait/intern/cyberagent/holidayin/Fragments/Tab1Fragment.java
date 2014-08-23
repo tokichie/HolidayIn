@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -20,6 +21,8 @@ import br.com.condesales.criterias.TipsCriteria;
 import br.com.condesales.criterias.TrendingVenuesCriteria;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Checkin;
+import br.com.condesales.models.PhotoItem;
+import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Score;
 import br.com.condesales.models.ScoreItem;
 import br.com.condesales.models.Statistics;
@@ -39,7 +42,9 @@ import fi.foyt.foursquare.api.entities.Tips;
 import fi.foyt.foursquare.api.entities.VenueGroup;
 import fi.foyt.foursquare.api.entities.VenuesSearchResult;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.MainActivity;
+import jp.icecreamparfait.intern.cyberagent.holidayin.PhotoGetter;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
@@ -106,10 +111,9 @@ public class Tab1Fragment extends Fragment {
         String query = "ebisu";//bundle.getString("param1");
 //        Log.d("icecream", query);
 
-        List<Venue> venues = search(query);
-        //search2();
+        List<Venue> venues = search(query, v);
+//        List<Venue> venues = ResultStore.get().getResult();
 
-        Log.d("parfait", venues.toString());
 
         VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
 
@@ -119,7 +123,7 @@ public class Tab1Fragment extends Fragment {
         return v;
     }
 
-    private List<Venue> search(String query) {
+    private List<Venue> search(String query, View v) {
         EasyFoursquare efs = new EasyFoursquare(getActivity());
 
         Location loc = new Location("");
@@ -137,27 +141,9 @@ public class Tab1Fragment extends Fragment {
         TipsGroup tipsGroup = efs.getVenueTips(venues.get(0).getId());
         List<TipItem> tipItems = tipsGroup.getItems();
         TipItem tipItem = tipItems.get(0);
-        if (tipItem.getText() != null) {
-            Log.d("4sq", tipItem.getText());
-        } else {
-            Log.d("4sq", "null");
-        }
-
-        /*
-
-        CheckInCriteria ciCriteria = new CheckInCriteria();
-        ciCriteria.setVenueId(venues.get(0).getId());
-        ciCriteria.setLocation(loc);
 
 
-        Checkin checkin = efs.checkIn(ciCriteria);
 
-        Log.d("icecream", checkin.toString());
-
-        Score score = checkin.getScore();
-        List<ScoreItem> scoreItems = score.getScores();
-        Log.d("icecream", scoreItems.get(0).toString());
-        */
 
         return venues;
     }
