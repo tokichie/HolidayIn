@@ -13,8 +13,10 @@ import br.com.condesales.criterias.TrendingVenuesCriteria;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.listeners.AccessTokenRequestListener;
 import br.com.condesales.listeners.VenuePhotosListener;
+import br.com.condesales.listeners.VenueTipsListener;
 import br.com.condesales.models.Checkin;
 import br.com.condesales.models.Tip;
+import br.com.condesales.models.TipsGroup;
 import br.com.condesales.models.User;
 import br.com.condesales.models.Venue;
 import br.com.condesales.models.Venues;
@@ -29,6 +31,7 @@ import br.com.condesales.tasks.venues.FoursquareTrendingVenuesNearbyRequest;
 import br.com.condesales.tasks.venues.FoursquareVenueDetailsRequest;
 import br.com.condesales.tasks.venues.FoursquareVenuesNearbyRequest;
 import br.com.condesales.tasks.venues.GetVenuePhotosRequest;
+import br.com.condesales.tasks.venues.GetVenueTipsRequest;
 
 /**
  * Class to handle methods used to perform requests to FoursquareAPI and respond
@@ -279,6 +282,32 @@ public class EasyFoursquare {
             e.printStackTrace();
         }
         return photosGroup;
+    }
+
+    public TipsGroup getVenueTips(String venueID) {
+        GetVenueTipsRequest request = new GetVenueTipsRequest(mActivity, new VenueTipsListener() {
+            @Override
+            public void onGotVenueTips(TipsGroup tipsGroup) {
+
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+
+            }
+        }, venueID);
+
+        request.execute(getAccessToken());
+        TipsGroup tipsGroup = null;
+        try {
+            tipsGroup = request.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return tipsGroup;
     }
 
     private boolean hasAccessToken() {

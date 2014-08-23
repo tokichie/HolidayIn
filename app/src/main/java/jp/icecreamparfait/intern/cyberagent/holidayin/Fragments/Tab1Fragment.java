@@ -16,12 +16,16 @@ import java.util.List;
 
 import br.com.condesales.EasyFoursquare;
 import br.com.condesales.criterias.CheckInCriteria;
+import br.com.condesales.criterias.TipsCriteria;
 import br.com.condesales.criterias.TrendingVenuesCriteria;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Checkin;
 import br.com.condesales.models.Score;
 import br.com.condesales.models.ScoreItem;
 import br.com.condesales.models.Statistics;
+import br.com.condesales.models.Tip;
+import br.com.condesales.models.TipItem;
+import br.com.condesales.models.TipsGroup;
 import br.com.condesales.models.Venue;
 import fi.foyt.foursquare.api.FoursquareApi;
 import fi.foyt.foursquare.api.FoursquareApiException;
@@ -99,7 +103,7 @@ public class Tab1Fragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tab1, container, false);
 
         Bundle bundle = getArguments();
-        String query = "えびす";//bundle.getString("param1");
+        String query = "ebisu";//bundle.getString("param1");
 //        Log.d("icecream", query);
 
         List<Venue> venues = search(query);
@@ -130,6 +134,14 @@ public class Tab1Fragment extends Fragment {
 
         List<Venue> venues = efs.getVenuesNearby(vCriteria);
 
+        TipsGroup tipsGroup = efs.getVenueTips(venues.get(0).getId());
+        List<TipItem> tipItems = tipsGroup.getItems();
+        TipItem tipItem = tipItems.get(0);
+        if (tipItem.getText() != null) {
+            Log.d("4sq", tipItem.getText());
+        } else {
+            Log.d("4sq", "null");
+        }
 
         /*
 
@@ -148,21 +160,6 @@ public class Tab1Fragment extends Fragment {
         */
 
         return venues;
-    }
-
-    private void search2() {
-        FoursquareApi api = new FoursquareApi(MainActivity.CLIENT_ID, MainActivity.CLIENT_SECRET, MainActivity.REDIRECT_URL);
-        Result<VenuesSearchResult> result = null;
-        try {
-            result = api.venuesSearch("139.7069,35.6432", null, null, null, "ebisu", null, null, null, null, null, null);
-        } catch (FoursquareApiException e) {
-            e.printStackTrace();
-        }
-
-        CompactVenue[] venues = result.getResult().getVenues();
-        CompleteSpecial[] specials = venues[0].getSpecials();
-
-        Log.d("icecream", venues.toString());
     }
 
     // TODO: Rename method, update argument and hook method into UI event

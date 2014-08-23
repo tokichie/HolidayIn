@@ -46,8 +46,6 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
         }
         Log.d("icecream", category);
 
-//        List<Tip> tips = venue.
-
         TextView textView_title;
         textView_title = (TextView)convertView.findViewById(R.id.textView_title);
         textView_title.setText(venue.getName());

@@ -78,8 +78,8 @@ public class Tab2Fragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tab2, container, false);
 
         Bundle bundle = getArguments();
-        String query = bundle.getString("param1");
-        Log.d("icecream", query);
+        String query = "ebisu";//bundle.getString("param1");
+//        Log.d("icecream", query);
 
         List<Venue> venues = search(query);
         //search2();

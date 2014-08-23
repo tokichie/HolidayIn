@@ -32,6 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_height="32dp"
         android:drawableLeft="@drawable/foursquare_icon"
+        android:drawablePadding="-25dp"
         android:text="@string/login_with_4sq"
         android:id="@+id/button_login"
         android:layout_marginBottom="40dp"

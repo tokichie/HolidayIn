@@ -1,9 +1,7 @@
 package br.com.condesales.tasks.venues;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -15,45 +13,39 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import br.com.condesales.constants.FoursquareConstants;
-import br.com.condesales.listeners.FoursquareVenueDetailsRequestListener;
-import br.com.condesales.models.Venue;
+import br.com.condesales.listeners.VenuePhotosListener;
+import br.com.condesales.listeners.VenueTipsListener;
+import br.com.condesales.models.PhotoItem;
+import br.com.condesales.models.PhotosGroup;
+import br.com.condesales.models.TipItem;
+import br.com.condesales.models.TipsGroup;
 
-public class FoursquareVenueDetailsRequest extends
-        AsyncTask<String, Integer, Venue> {
+/**
+ * Created by dionysis_lorentzos on 2/8/14.
+ * All rights reserved by the Author.
+ * Use with your own responsibility.
+ */
 
-    private Activity mActivity;
-    private ProgressDialog mProgress;
-    private FoursquareVenueDetailsRequestListener mListener;
+public class GetVenueTipsRequest extends AsyncTask<String, Integer, TipsGroup> {
+
+    private VenueTipsListener mListener;
     private String mVenueID;
 
-    public FoursquareVenueDetailsRequest(Activity activity,
-                                         FoursquareVenueDetailsRequestListener listener, String venueID) {
-        mActivity = activity;
+    public GetVenueTipsRequest(Activity activity, VenueTipsListener listener, String venueID) {
         mListener = listener;
         mVenueID = venueID;
     }
 
-    public FoursquareVenueDetailsRequest(Activity activity, String venueID) {
-        mActivity = activity;
-        mVenueID = venueID;
-    }
 
     @Override
-    protected void onPreExecute() {
-        mProgress = new ProgressDialog(mActivity);
-        mProgress.setCancelable(false);
-        mProgress.setMessage("Getting venue details ...");
-        mProgress.show();
-        super.onPreExecute();
-    }
-
-    @Override
-    protected Venue doInBackground(String... params) {
+    protected TipsGroup doInBackground(String... params) {
 
         String access_token = params[0];
-        Venue venue = null;
+        ArrayList<TipItem> tips = new ArrayList<TipItem>();
+        TipsGroup tipsGroup = new TipsGroup();
 
         try {
 
@@ -61,31 +53,27 @@ public class FoursquareVenueDetailsRequest extends
             String apiDateVersion = FoursquareConstants.API_DATE_VERSION;
             // Call Foursquare to get the Venues around
             String uri = "https://api.foursquare.com/v2/venues/" + mVenueID
-                    + "?v="
+                    + "/tips?v="
                     + apiDateVersion;
             if (!access_token.equals("")) {
                 uri = uri + "&oauth_token=" + access_token;
             } else {
                 uri = uri + "&client_id=" + FoursquareConstants.CLIENT_ID + "&client_secret=" + FoursquareConstants.CLIENT_SECRET;
             }
-            
-            JSONObject venuesJson = executeHttpGet(uri);
+
+            JSONObject tipsJson = executeHttpGet(uri);
 
             // Get return code
-            int returnCode = Integer.parseInt(venuesJson.getJSONObject("meta")
+            int returnCode = Integer.parseInt(tipsJson.getJSONObject("meta")
                     .getString("code"));
             // 200 = OK
             if (returnCode == 200) {
                 Gson gson = new Gson();
-                JSONObject json = venuesJson.getJSONObject("response")
-                        .getJSONObject("venue");
-                venue = gson.fromJson(json.toString(), Venue.class);
-                Log.d("4sq", json.toString());
-                Log.d("4sq", venue.toString());
+                JSONObject json = tipsJson.getJSONObject("response").getJSONObject("tips");
+                tipsGroup = gson.fromJson(json.toString(), TipsGroup.class);
             } else {
                 if (mListener != null)
-                    mListener.onError(venuesJson.getJSONObject("meta")
-                            .getString("errorDetail"));
+                    mListener.onError(tipsJson.getJSONObject("meta").getString("errorDetail"));
             }
 
         } catch (Exception exp) {
@@ -93,16 +81,18 @@ public class FoursquareVenueDetailsRequest extends
             if (mListener != null)
                 mListener.onError(exp.toString());
         }
-        return venue;
+
+        return tipsGroup;
     }
 
+
     @Override
-    protected void onPostExecute(Venue venues) {
-        mProgress.dismiss();
+    protected void onPostExecute(TipsGroup tipsGroup) {
         if (mListener != null)
-            mListener.onVenueDetailFetched(venues);
-        super.onPostExecute(venues);
+            mListener.onGotVenueTips(tipsGroup);
+        super.onPostExecute(tipsGroup);
     }
+
 
     // Calls a URI and returns the answer as a JSON object
     private JSONObject executeHttpGet(String uri) throws Exception {
@@ -120,4 +110,5 @@ public class FoursquareVenueDetailsRequest extends
 
         return new JSONObject(sb.toString());
     }
+
 }
