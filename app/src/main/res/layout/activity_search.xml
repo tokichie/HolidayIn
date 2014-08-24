@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shrinkColumns="1"
     android:stretchColumns="1"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:background="#53A8B7">
 
     <TableRow
         android:layout_width="wrap_content"
@@ -13,7 +14,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#223546"
             android:text="キーワード"
+            android:textSize="@dimen/activity_horizontal_margin"
             android:id="@+id/textView2" />
 
         <EditText
@@ -32,7 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="所要時間"
-            android:id="@+id/textView" />
+            android:id="@+id/textView"
+            android:textColor="#223546"
+            android:textSize="@dimen/activity_horizontal_margin"/>
 
         <Spinner
             android:layout_width="wrap_content"
@@ -48,7 +53,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="移動時間"
-            android:id="@+id/textView3" />
+            android:id="@+id/textView3"
+            android:textColor="#223546"
+            android:textSize="@dimen/activity_horizontal_margin"/>
 
         <Spinner
             android:layout_width="wrap_content"
@@ -57,18 +64,37 @@
     </TableRow>
 
     <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日の気分"
+            android:id="@+id/textView4"
+            android:textColor="#223546"
+            android:textSize="@dimen/activity_horizontal_margin"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_mood" />
+    </TableRow>
+
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="64dp"
             android:text="検索"
+            android:textSize="@dimen/activity_horizontal_margin"
             android:id="@+id/button_search"
             android:layout_span="2"
             android:background="@drawable/button_round"
-            android:layout_marginTop="10dp"
-            android:textColor="@android:color/holo_blue_light"/>
+            android:layout_marginTop="40dp"
+            android:textColor="#ffffff"/>
 
     </TableRow>
 </TableLayout>
