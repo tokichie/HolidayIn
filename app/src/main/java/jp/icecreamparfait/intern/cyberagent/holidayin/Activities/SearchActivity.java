@@ -37,6 +37,17 @@ public class SearchActivity extends Activity {
         Spinner spinner_movingtime = (Spinner) findViewById(R.id.spinner_movingtime);
         spinner_movingtime.setAdapter(adapter);
 
+        ArrayAdapter<String> adaptermood = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        adaptermood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adaptermood.add("優雅に");
+        adaptermood.add("楽しく");
+        adaptermood.add("気ままに");
+        adaptermood.add("ストレス発散");
+
+        Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
+        spinner_mood.setAdapter(adaptermood);
+
 
         Button button_search = (Button) findViewById(R.id.button_search);
         button_search.setOnClickListener(new View.OnClickListener() {
