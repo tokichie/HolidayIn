@@ -48,26 +48,15 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Tab1Fragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Tab1Fragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class Tab1Fragment extends Fragment {
 
     private boolean isFinished;
 
-
     private OnFragmentInteractionListener mListener;
 
     public Tab1Fragment() {
-        // Required empty public constructor
+        isFinished = false;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,50 +70,20 @@ public class Tab1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d("icecream", String.valueOf(container.getId()));
         View v = inflater.inflate(R.layout.fragment_tab1_loading, container, false);
         if (isFinished) {
-            Log.d("icecream", "finished");
             v = inflater.inflate(R.layout.fragment_tab1, container, false);
             List<Venue> venues = ResultStore.get().getResult();
-
 
             VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
 
             ListView listView = (ListView) v.findViewById(R.id.listView_detail);
             listView.setAdapter(adapter);
         }
-//        List<Venue> venues = search(query, v);
 
         return v;
     }
 
-//    private List<Venue> search(String query, View v) {
-//        EasyFoursquare efs = new EasyFoursquare(getActivity());
-//
-//        Location loc = new Location("");
-//        loc.setLongitude(139.7069874);
-//        loc.setLatitude(35.6432274);
-//
-//        VenuesCriteria vCriteria = new VenuesCriteria();
-//        vCriteria.setQuantity(10);
-//        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-//        vCriteria.setQuery(query);
-//        vCriteria.setLocation(loc);
-//
-//        List<Venue> venues = efs.getVenuesNearby(vCriteria);
-//
-//        TipsGroup tipsGroup = efs.getVenueTips(venues.get(0).getId());
-//        List<TipItem> tipItems = tipsGroup.getItems();
-//        TipItem tipItem = tipItems.get(0);
-//
-//
-//
-//
-//        return venues;
-//    }
-
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

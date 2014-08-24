@@ -52,7 +52,7 @@ public class FoursquareVenuesNearbyRequest extends
     protected void onPreExecute() {
         mProgress = new ProgressDialog(mActivity);
         mProgress.setCancelable(false);
-        mProgress.setMessage("Getting venues nearby ...");
+        mProgress.setMessage("検索しています...");
         mProgress.show();
         super.onPreExecute();
     }
@@ -127,8 +127,7 @@ public class FoursquareVenuesNearbyRequest extends
     @Override
     protected void onPostExecute(ArrayList<Venue> venues) {
         if (sslExp) {
-            Toast.makeText(mActivity, "You must log in to the Wifi network first, " +
-                    "or disconnect from it and use cellular connection.", Toast.LENGTH_LONG).show();
+            Toast.makeText(mActivity, "ネットワークに接続できませんでした。", Toast.LENGTH_LONG).show();
             mActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com")));
         }
 

@@ -5,6 +5,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -22,11 +26,12 @@ import com.foursquare.android.nativeoauth.FoursquareUnsupportedVersionException;
 import com.foursquare.android.nativeoauth.model.AccessTokenResponse;
 import com.foursquare.android.nativeoauth.model.AuthCodeResponse;
 
+import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TokenStore;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements LocationListener{
 
     public static final int REQUEST_CODE_FSQ_CONNECT = 200;
     public static final int REQUEST_CODE_FSQ_TOKEN_EXCHANGE = 201;
@@ -36,10 +41,21 @@ public class MainActivity extends Activity {
     public static final String REDIRECT_URL = "https://github.com/techcampman/tokyo_smartphone1_C";
 
 
+    private void setLocationManager() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        String provider = locationManager.getBestProvider(criteria, true);
+        locationManager.requestLocationUpdates(provider, 0, 0, this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setLocationManager();
 
         Button button_no_login = (Button) findViewById(R.id.button_nologin);
         Button button_map = (Button) findViewById(R.id.button_map);
@@ -163,13 +179,13 @@ public class MainActivity extends Activity {
         if (exception == null) {
             String accessToken = tokenResponse.getAccessToken();
             // Success.
-            toastMessage(this, "Access token: " + accessToken + "\n\n正常にログインしました。");
+            toastMessage(this, "正常にログインしました。");
 
             // Persist the token for later use. In this example, we save
             // it to shared prefs.
             TokenStore.get().setToken(accessToken);
 
-            startSearchActivity();;
+            startSearchActivity();
 
         } else {
             if (exception instanceof FoursquareOAuthException) {
@@ -215,5 +231,25 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LocationStore.get().setLocation(location);
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
     }
 }

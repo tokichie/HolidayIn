@@ -21,6 +21,7 @@ import br.com.condesales.listeners.GetCheckInsListener;
 import br.com.condesales.listeners.TipsRequestListener;
 import br.com.condesales.listeners.UserInfoRequestListener;
 import br.com.condesales.listeners.VenuePhotosListener;
+import br.com.condesales.listeners.VenueTipsListener;
 import br.com.condesales.listeners.VenuesHistoryListener;
 import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.tasks.checkins.CheckInRequest;
@@ -33,6 +34,7 @@ import br.com.condesales.tasks.venues.FoursquareTrendingVenuesNearbyRequest;
 import br.com.condesales.tasks.venues.FoursquareVenueDetailsRequest;
 import br.com.condesales.tasks.venues.FoursquareVenuesNearbyRequest;
 import br.com.condesales.tasks.venues.GetVenuePhotosRequest;
+import br.com.condesales.tasks.venues.GetVenueTipsRequest;
 
 /**
  * Class to handle methods used to perform requests to FoursquareAPI and respond
@@ -181,6 +183,11 @@ public class EasyFoursquareAsync {
         GetVenuePhotosRequest request = new GetVenuePhotosRequest(mActivity, listener, venueID);
         request.execute(getAccessToken());
 
+    }
+
+    public void getVenueTips(String venueID, VenueTipsListener listener) {
+        GetVenueTipsRequest request = new GetVenueTipsRequest(mActivity, listener, venueID);
+        request.execute(getAccessToken());
     }
 
 
