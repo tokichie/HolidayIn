@@ -2,6 +2,7 @@ package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,27 +61,32 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
         textView_category.setText(category);
 
         final ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
+        imageView_photo.setTag(venue.getId());
 
-        EasyFoursquareAsync api = new EasyFoursquareAsync(mActivity);
-        api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
-            @Override
-            public void onGotVenuePhotos(PhotosGroup photosGroup) {
-                if (photosGroup.getCount() > 0) {
-                    List<PhotoItem> photoItems = photosGroup.getItems();
-                    String prefix = photoItems.get(0).getPrefix();
-                    String suffix = photoItems.get(0).getSuffix();
+        Bitmap img = PhotoStore.getImage(venue.getId());
+        if (img != null) {
+            imageView_photo.setImageBitmap(img);
+        } else {
+            EasyFoursquareAsync api = new EasyFoursquareAsync(mActivity);
+            api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
+                @Override
+                public void onGotVenuePhotos(PhotosGroup photosGroup) {
+                    if (photosGroup.getCount() > 0) {
+                        List<PhotoItem> photoItems = photosGroup.getItems();
+                        String prefix = photoItems.get(0).getPrefix();
+                        String suffix = photoItems.get(0).getSuffix();
 
-                    PhotoGetter getter = new PhotoGetter(imageView_photo);
-                    getter.execute(prefix + "200x200" + suffix);
+                        PhotoGetter getter = new PhotoGetter(imageView_photo);
+                        getter.execute(prefix + "200x200" + suffix);
+                    }
                 }
-            }
 
-            @Override
-            public void onError(String errorMsg) {
+                @Override
+                public void onError(String errorMsg) {
 
-            }
-        });
-
+                }
+            });
+        }
 
         return convertView;
     }

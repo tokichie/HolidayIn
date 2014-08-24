@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,6 +20,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
@@ -67,6 +71,7 @@ public class FoursquareVenuesNearbyRequest extends
 
             //date required
             String apiDateVersion = FoursquareConstants.API_DATE_VERSION;
+            Set<String> categories = mCriteria.getCategories();
             // Call Foursquare to get the Venues around
             String uri = "https://api.foursquare.com/v2/venues/search"
                     + "?v="
@@ -86,11 +91,22 @@ public class FoursquareVenuesNearbyRequest extends
                     + "&radius="
                     + mCriteria.getRadius()
                     + "&locale=ja";
+            if (categories != null) {
+                uri += "&categoryId=";
+                for (Iterator<String> itr = categories.iterator(); itr.hasNext();) {
+                    uri += itr.next();
+                    if (itr.hasNext()) {
+                        uri += ",";
+                    }
+                }
+            }
             if (!access_token.equals("")) {
                 uri = uri + "&oauth_token=" + access_token;
             } else {
                 uri = uri + "&client_id=" + FoursquareConstants.CLIENT_ID + "&client_secret=" + FoursquareConstants.CLIENT_SECRET;
             }
+
+            Log.d("4sq", uri);
 
             JSONObject venuesJson = executeHttpGet(uri);
 

@@ -1,5 +1,6 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 
 import java.util.HashMap;
@@ -13,25 +14,30 @@ import br.com.condesales.models.PhotosGroup;
 public class PhotoStore {
     private static PhotoStore instance;
 
-    private Map<String, PhotosGroup> mMap;
+    private static Map<String, Bitmap> mMap = new HashMap<String, Bitmap>();
 
-    public PhotoStore() {
-        mMap = new HashMap<String, PhotosGroup>();
+//    public PhotoStore() {
+//        mMap = new HashMap<String, Bitmap>();
+//    }
+//
+//    public static PhotoStore get() {
+//        if (instance == null) {
+//            instance = new PhotoStore();
+//        }
+//
+//        return instance;
+//    }
+
+    public static void putImage(String key, Bitmap bmp) {
+        mMap.put(key, bmp);
     }
 
-    public static PhotoStore get() {
-        if (instance == null) {
-            instance = new PhotoStore();
-        }
-
-        return instance;
-    }
-
-    public void putPhotosGroup(String key, PhotosGroup photosGroup) {
-        mMap.put(key, photosGroup);
-    }
-
-    public PhotosGroup getPhotosGroup(String key) {
+    public static Bitmap getImage(String key) {
         return mMap.get(key);
+    }
+
+    public static void clear() {
+        mMap = null;
+        mMap = new HashMap<String, Bitmap>();
     }
 }

@@ -3,6 +3,9 @@ package br.com.condesales.criterias;
 import android.location.Location;
 import android.location.LocationManager;
 
+import java.util.List;
+import java.util.Set;
+
 public class VenuesCriteria {
 
 	public enum VenuesCriteriaIntent {
@@ -22,6 +25,7 @@ public class VenuesCriteria {
 	private String mQuery = "";
 	private int mRadius = 1000;
 	private int mQuantity = 10;
+    private Set<String> mCategories = null;
 	private Location mLocation = new Location(LocationManager.GPS_PROVIDER);
 	private VenuesCriteriaIntent intent = VenuesCriteriaIntent.CHECKIN;
 
@@ -64,5 +68,9 @@ public class VenuesCriteria {
 	public void setIntent(VenuesCriteriaIntent intent) {
 		this.intent = intent;
 	}
+
+    public Set<String> getCategories() { return mCategories; }
+
+    public void setCategories(Set<String> categories) { this.mCategories = categories; }
 
 }

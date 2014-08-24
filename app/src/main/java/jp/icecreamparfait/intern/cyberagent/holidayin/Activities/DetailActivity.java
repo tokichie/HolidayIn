@@ -33,6 +33,7 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.AsyncCallback;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans.IntellectualPlan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.PhotoStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
@@ -76,10 +77,34 @@ public class DetailActivity extends Activity implements
         VenuesCriteria vCriteria = new VenuesCriteria();
         vCriteria.setQuantity(10);
         vCriteria.setQuery(query);
-        vCriteria.setLocation(LocationStore.get().getLocation());
+        vCriteria.setLocation(LocationStore.getLocation());
         vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
 
         api.getVenuesNearby(this, vCriteria);
+    }
+
+    private void startSearchWithPlan() {
+        String query = "";
+
+        VenuesCriteria criteria = new VenuesCriteria();
+        criteria.setQuantity(20);
+        criteria.setLocation(LocationStore.getLocation());
+        criteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        criteria.setCategories(IntellectualPlan.belongingCategories.keySet());
+
+        api.getVenuesNearby(new FoursquareVenuesRequestListener() {
+            @Override
+            public void onVenuesFetched(ArrayList<Venue> venues) {
+                IntellectualPlan.makePlan(venues, 120);
+                Log.d("icecream", venues.toString());
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                Log.d("icecream", errorMsg);
+            }
+        }, criteria);
+        //IntellectualPlan.search(api, criteria);
     }
 
     private void fetchPhotos(ArrayList<Venue> venues) {
@@ -87,7 +112,7 @@ public class DetailActivity extends Activity implements
             api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
                 @Override
                 public void onGotVenuePhotos(PhotosGroup photosGroup) {
-                    PhotoStore.get().putPhotosGroup(venue.getId(), photosGroup);
+//                    PhotoStore.get().putPhotosGroup(venue.getId(), photosGroup);
                 }
 
                 @Override
@@ -100,7 +125,7 @@ public class DetailActivity extends Activity implements
 
     @Override
     public void onVenuesFetched(ArrayList<Venue> venues) {
-        fetchPhotos(venues);
+//        fetchPhotos(venues);
 
         ResultStore.get().setResult(venues);
 
@@ -128,6 +153,7 @@ public class DetailActivity extends Activity implements
 
         setActionBar();
         startSearch(ResultStore.get().getQuery());
+        startSearchWithPlan();
     }
 
 

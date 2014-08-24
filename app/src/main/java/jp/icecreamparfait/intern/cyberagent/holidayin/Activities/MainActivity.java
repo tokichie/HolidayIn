@@ -9,6 +9,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -68,6 +69,9 @@ public class MainActivity extends Activity implements LocationListener{
         button_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Uri uri = Uri.parse("https://foursquare.com/venue/503de4dce4b0857b003af5f7");
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
                 Intent intent_search = new Intent(MainActivity.this, SingleActivity.class);
                 startActivity(intent_search);
             }
@@ -235,7 +239,7 @@ public class MainActivity extends Activity implements LocationListener{
 
     @Override
     public void onLocationChanged(Location location) {
-        LocationStore.get().setLocation(location);
+        LocationStore.setLocation(location);
     }
 
     @Override

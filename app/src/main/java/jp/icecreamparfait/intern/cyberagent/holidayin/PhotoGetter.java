@@ -5,12 +5,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * Created by tokitake on 2014/08/22.
@@ -18,18 +20,15 @@ import java.net.URL;
 public class PhotoGetter extends AsyncTask<String, Void, Bitmap>{
 
     private ImageView mImageView;
-    private int mWidth;
-    private int mHeight;
+    private Object mTag;
 
     public PhotoGetter(ImageView imageView) {
         mImageView = imageView;
-        mWidth = imageView.getWidth();
-        mHeight = imageView.getHeight();
+        mTag = imageView.getTag();
     }
 
     @Override
     protected Bitmap doInBackground(String... strings) {
-        //Bitmap bmp;// = Bitmap.createBitmap(mWidth, mHeight, null);
         try {
             URL url = new URL(strings[0]);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -45,12 +44,15 @@ public class PhotoGetter extends AsyncTask<String, Void, Bitmap>{
             e.printStackTrace();
             return null;
         }
-
-        //return null;
     }
 
     @Override
     protected void onPostExecute(Bitmap bmp) {
-        mImageView.setImageBitmap(bmp);
+        if (mTag != null && mTag.equals(mImageView.getTag())) {
+            PhotoStore.putImage(mTag.toString(), bmp);
+            if (bmp != null) {
+                mImageView.setImageBitmap(bmp);
+            }
+        }
     }
 }
