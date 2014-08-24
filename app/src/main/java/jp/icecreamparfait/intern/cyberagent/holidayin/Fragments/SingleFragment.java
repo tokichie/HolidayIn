@@ -1,36 +1,25 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
 
 import android.app.Activity;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import java.util.List;
-
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.PlanAdapter;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Tab2Fragment.OnFragmentInteractionListener} interface
+ * {@link SingleFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Tab2Fragment#newInstance} factory method to
+ * Use the {@link SingleFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class Tab2Fragment extends Fragment {
+public class SingleFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,18 +37,18 @@ public class Tab2Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment tab2Fragment.
+     * @return A new instance of fragment SingleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab2Fragment newInstance(String param1, String param2) {
-        Tab2Fragment fragment = new Tab2Fragment();
+    public static SingleFragment newInstance(String param1, String param2) {
+        SingleFragment fragment = new SingleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public Tab2Fragment() {
+    public SingleFragment() {
         // Required empty public constructor
     }
 
@@ -76,61 +65,8 @@ public class Tab2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_tab2, container, false);
-
-        Bundle bundle = getArguments();
-        String query = "ebisu";//bundle.getString("param1");
-//        Log.d("icecream", query);
-
-        List<Venue> venues = search(query);
-        //search2();
-
-        PlanAdapter adapter = new PlanAdapter(getActivity(), 0, venues);
-
-
-        ListView listView = (ListView) v.findViewById(R.id.listView_detail);
-        listView.setAdapter(adapter);
-
-        return v;
-
-
+        return inflater.inflate(R.layout.fragment_single, container, false);
     }
-
-    private List<Venue> search(String query) {
-        EasyFoursquare efs = new EasyFoursquare(getActivity());
-
-        Location loc = new Location("");
-        loc.setLongitude(139.7069874);
-        loc.setLatitude(35.6432274);
-
-        VenuesCriteria vCriteria = new VenuesCriteria();
-        vCriteria.setQuantity(10);
-        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-        vCriteria.setQuery(query);
-        vCriteria.setLocation(loc);
-
-        List<Venue> venues = efs.getVenuesNearby(vCriteria);
-
-
-        /*
-
-        CheckInCriteria ciCriteria = new CheckInCriteria();
-        ciCriteria.setVenueId(venues.get(0).getId());
-        ciCriteria.setLocation(loc);
-
-
-        Checkin checkin = efs.checkIn(ciCriteria);
-
-        Log.d("icecream", checkin.toString());
-
-        Score score = checkin.getScore();
-        List<ScoreItem> scoreItems = score.getScores();
-        Log.d("icecream", scoreItems.get(0).toString());
-        */
-
-        return venues;
-    }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

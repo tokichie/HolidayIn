@@ -33,4 +33,5 @@ dependencies {
     compile project(':foursquareoauthlibrary')
     compile project(':easyFoursquare4Android')
     compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'com.android.support:support-v4:+'
 }

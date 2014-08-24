@@ -42,12 +42,21 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         Button button_no_login = (Button) findViewById(R.id.button_nologin);
+        Button button_map = (Button) findViewById(R.id.button_map);
         button_no_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startSearchActivity();
             }
         });
+        button_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_search = new Intent(MainActivity.this, SingleActivity.class);
+                startActivity(intent_search);
+            }
+        });
+
 
         ensureUi();
     }
