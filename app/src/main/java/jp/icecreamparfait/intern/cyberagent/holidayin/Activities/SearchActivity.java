@@ -38,11 +38,15 @@ public class SearchActivity extends Activity {
 
                 Spinner spinner_required_time = (Spinner) findViewById(R.id.spinner_takingtime);
                 Spinner spinner_moving_time = (Spinner) findViewById(R.id.spinner_movingtime);
+                Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
 
                 QueryStore.setRequiredTime(QueryStore.fromOrdinal(
-                        QueryStore.RequiredTime.class, spinner_required_time.getSelectedItemPosition()));
+                        QueryStore.Time.class, spinner_required_time.getSelectedItemPosition()));
                 QueryStore.setMovingTime(QueryStore.fromOrdinal(
-                        QueryStore.MovingTime.class, spinner_moving_time.getSelectedItemPosition()));
+                        QueryStore.Time.class, spinner_moving_time.getSelectedItemPosition()));
+                QueryStore.setPlan(QueryStore.fromOrdinal(
+                        QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
+
                 intent.putExtra("query", query);
 
                 startActivity(intent);

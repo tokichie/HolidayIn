@@ -1,7 +1,5 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -11,33 +9,22 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
 
 /**
- * Created by tokitake on 2014/08/24.
+ * Created by tokitake on 2014/08/25.
  */
-public class IntellectualPlan{
-    public static HashMap<String, Integer> belongingCategories =
-            new HashMap<String, Integer>() {
-                {
-                    put("4bf58dd8d48988d1e2931735", 45);  //ArtGallery
-                    put("4bf58dd8d48988d127951735", 30);  //Arts&CraftsStore
-                    put("4bf58dd8d48988d114951735", 60);  //BookStore
-                    put("4deefb944765f83613cdba6e", 60);  //HistorySite
-                    put("4bf58dd8d48988d181941735", 90);  //Museum
-                }
-            };
-
-    public static HashMap<String, Integer> attachments =
-            new HashMap<String, Integer>() {
-                {
-                    put("4bf58dd8d48988d16d941735", 60);  //Cafe
-                    put("4bf58dd8d48988d128941735", 60);  //Cafeteria
-                    put("4bf58dd8d48988d1e0931735", 60);  //CoffeeShop
-                    put("4bf58dd8d48988d1dc931735", 60);  //Tearoom
-                }
-            };
+public class BasePlan {
+    public HashMap<String, Integer> belongingCategories;
+    public HashMap<String, Integer> attachments;
+    public static BasePlan[] Plans = new BasePlan[] { new GracefulPlan(), new HappyPlan(), new FreePlan(), new StressFreePlan() };
 
     private static Plan mPlan;
     private static boolean isSetMainSpots = false;
     private static boolean isSetAttachments = false;
+
+    public static void resetPlan() {
+        mPlan = null;
+        isSetMainSpots = false;
+        isSetAttachments = false;
+    }
 
     public static Plan makePlan() {
         if (isSetMainSpots && isSetAttachments) {
@@ -53,11 +40,11 @@ public class IntellectualPlan{
             mPlan = new Plan();
         }
 
-        Log.d("icecream", String.valueOf(venues.size()));
         while (spotsCount-- > 0) {
             Random rnd = new Random();
             int selectedPos = rnd.nextInt(venues.size());
             Venue venue = venues.get(selectedPos);
+            venues.remove(selectedPos);
 
             mPlan.addVenue(venue);//, belongingCategories.get(venue.getCategories().get(0).getId()));
         }
@@ -78,5 +65,4 @@ public class IntellectualPlan{
 
         isSetAttachments = true;
     }
-
 }

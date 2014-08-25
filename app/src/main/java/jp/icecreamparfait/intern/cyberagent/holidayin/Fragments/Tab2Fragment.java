@@ -42,12 +42,10 @@ public class Tab2Fragment extends Fragment {
 
         List<Plan> plans = new ArrayList<Plan>();
         plans.add(plan);
-        PlanAdapter adapter = new PlanAdapter(getActivity(), 0, plans, getActivity());
+        PlanAdapter adapter = new PlanAdapter(getActivity(), 0, plans);
 
         ListView listView = (ListView) v.findViewById(R.id.listView_detail_plan);
         listView.setAdapter(adapter);
-
-//        View v_nest = inflater.inflate(R.layout.detail_row)
 
         return v;
     }

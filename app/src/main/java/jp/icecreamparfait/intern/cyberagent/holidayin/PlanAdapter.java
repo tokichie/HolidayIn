@@ -2,19 +2,27 @@ package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
+import br.com.condesales.EasyFoursquareAsync;
+import br.com.condesales.listeners.VenuePhotosListener;
 import br.com.condesales.models.Category;
+import br.com.condesales.models.PhotoItem;
+import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
 
@@ -25,9 +33,9 @@ public class PlanAdapter extends ArrayAdapter<Plan> {
     private LayoutInflater layoutInflater_;
     private Activity mActivity;
 
-    public PlanAdapter(Context context, int textViewResourceId, List<Plan> plans, Activity activity) {
-        super(context, textViewResourceId, plans);
-        layoutInflater_ = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public PlanAdapter(Activity activity, int textViewResourceId, List<Plan> plans) {
+        super(activity, textViewResourceId, plans);
+        layoutInflater_ = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mActivity = activity;
     }
 
@@ -45,15 +53,16 @@ public class PlanAdapter extends ArrayAdapter<Plan> {
         textView_counter = (TextView)convertView.findViewById(R.id.textView_counter);
         textView_counter.setText("プラン" + String.valueOf(position+1));
 
-        ListView listView_planItems = (ListView) convertView.findViewById(R.id.listView_planItems);
-        Log.d("icecream", plan.getMainVenues().toString());
-        VenueAdapter adapter = new VenueAdapter(mActivity, 0, plan.getMainVenues());
-        listView_planItems.setAdapter(adapter);
+        for (Venue venue: plan.getMainVenues()) {
+            LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.linearLayout_planItems);
 
-        Log.d("icecream", String.valueOf(listView_planItems.getLayoutParams().height));
+            View v = layoutInflater_.inflate(R.layout.detail_row, null);
 
-        ListView listView_planDetail = (ListView) parent.findViewById(R.id.listView_detail_plan);
-//        listView_planDetail
+            VenueDetailSetter.set(mActivity, venue, v);
+
+            layout.addView(v);
+        }
+
         return convertView;
 
     }

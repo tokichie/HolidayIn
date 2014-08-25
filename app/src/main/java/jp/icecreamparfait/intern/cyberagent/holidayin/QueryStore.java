@@ -10,22 +10,25 @@ import br.com.condesales.models.Venue;
 public class QueryStore {
     private static QueryStore instance = new QueryStore();
 
-    private static String mQuery = "ebisu";
+    private static String mQuery = "";
 
-    private static RequiredTime mRequiredTime = RequiredTime.Light;
+    private static Time mRequiredTime = Time.Short;
 
-    private static MovingTime mMovingTime = MovingTime.Short;
+    private static Time mMovingTime = Time.Short;
 
-    public enum RequiredTime{
-        Light,
-        Middle,
-        Heavy;
-    };
+    private static PlanMood mPlanMood = PlanMood.Graceful;
 
-    public enum MovingTime{
+    public enum Time{
         Short,
         Middle,
         Long;
+    };
+
+    public enum PlanMood{
+        Graceful,
+        Happy,
+        Free,
+        StressFree;
     }
 
     public static <E extends Enum<E>> E fromOrdinal(Class<E> enumClass, int ordinal) {
@@ -37,13 +40,17 @@ public class QueryStore {
         mQuery = query;
     }
 
-    public static void setRequiredTime(RequiredTime requiredTime) { mRequiredTime = requiredTime; }
+    public static void setRequiredTime(Time requiredTime) { mRequiredTime = requiredTime; }
 
-    public static void setMovingTime(MovingTime movingTime) { mMovingTime = movingTime; }
+    public static void setMovingTime(Time movingTime) { mMovingTime = movingTime; }
+
+    public static void setPlan(PlanMood planMood) { mPlanMood = planMood; }
 
     public static String getQuery() { return mQuery; }
 
-    public static RequiredTime getRequiredTime() { return mRequiredTime; }
+    public static Time getRequiredTime() { return mRequiredTime; }
 
-    public static MovingTime getMovingTime() { return mMovingTime; }
+    public static Time getMovingTime() { return mMovingTime; }
+
+    public static PlanMood getPlanMood() { return mPlanMood; }
 }

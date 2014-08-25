@@ -10,10 +10,13 @@
         android:id="@+id/textView_counter"
         android:layout_margin="10dip"/>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView_planItems" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/linearLayout_planItems"
+        android:paddingLeft="20dp"
+        android:paddingRight="0dp"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"

@@ -42,19 +42,14 @@
                     android:src="@drawable/genre"
                     android:orientation="vertical"/>
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/textView_category"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp" />
 
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="New Text"
-                        android:id="@+id/textView_category"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -69,16 +64,20 @@
                     android:id="@+id/imageView_train"
                     android:orientation="vertical"/>
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"></LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/textView_location"
+                    android:textSize="12sp"
+                    android:layout_marginLeft="5dp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -87,13 +86,10 @@
                     android:id="@+id/imageView_time"
                     android:orientation="vertical"/>
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"></LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
