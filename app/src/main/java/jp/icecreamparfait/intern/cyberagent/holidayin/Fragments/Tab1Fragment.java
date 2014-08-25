@@ -2,6 +2,7 @@ package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -42,13 +44,14 @@ import fi.foyt.foursquare.api.entities.Tips;
 import fi.foyt.foursquare.api.entities.VenueGroup;
 import fi.foyt.foursquare.api.entities.VenuesSearchResult;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.MainActivity;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.VenueDetailActivity;
 import jp.icecreamparfait.intern.cyberagent.holidayin.PhotoGetter;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 
-public class Tab1Fragment extends Fragment {
+public class Tab1Fragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private boolean isFinished;
 
@@ -79,6 +82,7 @@ public class Tab1Fragment extends Fragment {
 
             ListView listView = (ListView) v.findViewById(R.id.listView_detail_spot);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(this);
         }
 
         return v;
@@ -106,6 +110,14 @@ public class Tab1Fragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+        Intent intent = new Intent(getActivity(), VenueDetailActivity.class);
+        intent.putExtra("selectedPosition", pos);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.in_right, R.anim.out_left);
     }
 
     /**

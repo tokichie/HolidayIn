@@ -8,15 +8,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:id="@+id/textView_counter"
-        android:layout_margin="10dip"/>
+        android:layout_margin="10dip"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/linearLayout_planItems"
-        android:paddingLeft="20dp"
-        android:paddingRight="0dp"></LinearLayout>
+        android:layout_marginLeft="20dp"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"

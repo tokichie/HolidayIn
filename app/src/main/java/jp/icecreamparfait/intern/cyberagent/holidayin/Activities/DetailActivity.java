@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,6 @@ public class DetailActivity extends Activity implements
     private EasyFoursquareAsync api;
 
     private void setActionBar() {
-        // Set up the action bar.
         final ActionBar actionBar = getActionBar();
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -60,33 +60,28 @@ public class DetailActivity extends Activity implements
     }
 
     private void startSearch(String query) {
-//        Location loc = new Location("");
-//        loc.setLongitude(139.7069874);
-//        loc.setLatitude(35.6432274);
+        int planId = QueryStore.getPlanMood().ordinal();
+        final BasePlan basePlan = BasePlan.Plans[planId];
 
-        VenuesCriteria vCriteria = new VenuesCriteria();
-        vCriteria.setQuantity(10);
-        vCriteria.setQuery(query);
-        if (LocationStore.getLocation() == null) {
-            Toast.makeText(this, "位置取得ができませんでした。", Toast.LENGTH_SHORT);
-        }
-        vCriteria.setLocation(LocationStore.getLocation());
-        vCriteria.setRadius((QueryStore.getMovingTime().ordinal()+1) * 5000);
-        vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        VenuesCriteria criteria = new VenuesCriteria();
+        criteria.setQuantity(10);
+        criteria.setQuery(query);
 
-        api.getVenuesNearby(this, vCriteria);
+        criteria.setLocation(LocationStore.getLocation());
+        criteria.setRadius((QueryStore.getMovingTime().ordinal()+1) * 5000);
+        criteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
+        criteria.setCategories(basePlan.belongingCategories.keySet());
+
+        api.getVenuesNearby(this, criteria);
     }
 
     private void startSearchWithPlan() {
         int planId = QueryStore.getPlanMood().ordinal();
         final BasePlan basePlan = BasePlan.Plans[planId];
 
-        Log.d("icecream", basePlan.toString());
-
         basePlan.resetPlan();
-//        GracefulPlan.resetPlan();
 
-        String query = ResultStore.getQuery();
+        String query = QueryStore.getQuery();
 
         VenuesCriteria criteria = new VenuesCriteria();
         criteria.setQuantity(20);
@@ -94,17 +89,16 @@ public class DetailActivity extends Activity implements
         criteria.setLocation(LocationStore.getLocation());
         criteria.setRadius((QueryStore.getMovingTime().ordinal()+1) * 5000);
         criteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-//        criteria.setCategories(GracefulPlan.belongingCategories.keySet());
         criteria.setCategories(basePlan.belongingCategories.keySet());
-        Log.d("icecream", basePlan.belongingCategories.keySet().toString());
 
-
+        final Context context = this;
         api.getVenuesNearby(new FoursquareVenuesRequestListener() {
             @Override
             public void onVenuesFetched(ArrayList<Venue> venues) {
-//                GracefulPlan.setMainSpots(venues);
+                if (venues.size() == 0) {
+                    Toast toast = Toast.makeText(context, "見つかりませんでした", Toast.LENGTH_SHORT);
+                }
                 basePlan.setMainSpots(venues);
-//                Plan plan = GracefulPlan.makePlan();
                 Plan plan = basePlan.makePlan();
                 if (plan != null) {
                     ResultStore.setPlan(plan);
@@ -123,15 +117,12 @@ public class DetailActivity extends Activity implements
         criteria.setLocation(LocationStore.getLocation());
         criteria.setRadius((QueryStore.getMovingTime().ordinal()+1) * 5000);
         criteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
-//        criteria.setCategories(GracefulPlan.attachments.keySet());
         criteria.setCategories(basePlan.attachments.keySet());
 
         api.getVenuesNearby(new FoursquareVenuesRequestListener() {
             @Override
             public void onVenuesFetched(ArrayList<Venue> venues) {
-//                GracefulPlan.setAttachments(venues);
                 basePlan.setAttachments(venues);
-//                Plan plan = GracefulPlan.makePlan();
                 Plan plan = basePlan.makePlan();
                 if (plan != null) {
                     ResultStore.setPlan(plan);
@@ -172,7 +163,8 @@ public class DetailActivity extends Activity implements
         api = new EasyFoursquareAsync(this);
 
         setActionBar();
-        startSearch(ResultStore.getQuery());
+
+        startSearch(QueryStore.getQuery());
         startSearchWithPlan();
     }
 

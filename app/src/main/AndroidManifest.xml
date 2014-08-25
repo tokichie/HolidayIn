@@ -44,7 +44,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".Activities.SingleActivity"
+            android:name=".Activities.VenueDetailActivity"
             android:label="map"
             android:screenOrientation="portrait">
         </activity>

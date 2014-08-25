@@ -1,9 +1,8 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,26 +11,33 @@ import android.view.ViewGroup;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import javax.xml.transform.Result;
+
+import br.com.condesales.models.Location;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.VenueDetailSetter;
 
 /**
  * Created by guest on 2014/08/23.
  */
-public class SingleActivity extends FragmentActivity {
+public class VenueDetailActivity extends FragmentActivity {
+
+    private static int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single);
-        /*MapView map = new MapView(this, "AIzaSyAQYnEva2uluLrj4wR96doQ_c7ttZ2blUI");
-        map.setEnabled(true);
-        map.setClickable(true);
-        setContentView(map);*/
+        setContentView(R.layout.activity_venue_detail);
+
+        selectedPosition = getIntent().getExtras().getInt("selectedPosition");
+
+        View v = findViewById(R.id.linearLayout_venueDetail);
+        VenueDetailSetter.set(this, ResultStore.getResult().get(selectedPosition), v);
     }
 
 
@@ -75,7 +81,9 @@ public class SingleActivity extends FragmentActivity {
         @Override
         public void onResume() {
             super.onResume();
-            LatLng latLng = new LatLng(34.9950555, 135.737253);
+            //LatLng latLng = new LatLng(34.9950555, 135.737253);
+            Location loc = ResultStore.getResult().get(selectedPosition).getLocation();
+            LatLng latLng = new LatLng(loc.getLat(), loc.getLng());
 
             if (mMap == null) {
                 mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -87,6 +95,7 @@ public class SingleActivity extends FragmentActivity {
                 (CameraUpdateFactory.newCameraPosition(new CameraPosition(latLng, 16, 0, 0)));
             }
         }
+
     }
 }
 
