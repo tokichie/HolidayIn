@@ -2,7 +2,7 @@
 <resources>
     <string-array name="spinner_moving_time">
         <item>近場がいい</item>
-        <item>街に出たい</item>
+        <item>ほどほどがいい</item>
         <item>遠出したい</item>
     </string-array>
 </resources>

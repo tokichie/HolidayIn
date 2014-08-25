@@ -99,7 +99,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="64dp"
-                android:text="Go"
+                android:text="使ってみる"
                 android:id="@+id/button_searchtutorial"
                 android:layout_gravity="center_horizontal"
                 android:layout_above="@id/button_searchtutorial"

@@ -53,12 +53,20 @@ public class PlanAdapter extends ArrayAdapter<Plan> {
         textView_counter = (TextView)convertView.findViewById(R.id.textView_counter);
         textView_counter.setText("プラン" + String.valueOf(position+1));
 
-        for (Venue venue: plan.getMainVenues()) {
+        List<Venue> venues = plan.getMainVenues();
+        if (! venues.get(venues.size()-1).equals(plan.getAttachment())) {
+            venues.add(plan.getAttachment());
+        }
+
+        for (Venue venue: venues) {
             LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.linearLayout_planItems);
 
             View v = layoutInflater_.inflate(R.layout.detail_row, null);
 
             VenueDetailSetter.set(mActivity, venue, v);
+
+            LinearLayout layout_shadow = (LinearLayout) v.findViewById(R.id.linearLayout_shadow);
+            ((ViewGroup)v).removeView(layout_shadow);
 
             layout.addView(v);
         }

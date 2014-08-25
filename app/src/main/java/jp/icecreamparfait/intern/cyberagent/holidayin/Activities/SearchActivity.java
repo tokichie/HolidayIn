@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
@@ -30,10 +32,7 @@ public class SearchActivity extends Activity {
             public void onClick(View view) {
                 EditText editText_keyword = (EditText) findViewById(R.id.editText_keyword);
 
-                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
-                //Intent intent = new Intent(SearchActivity.this, MyActivity.class);
                 String query = editText_keyword.getText().toString();
-                ResultStore.setQuery(query);
                 QueryStore.setQuery(query);
 
                 Spinner spinner_required_time = (Spinner) findViewById(R.id.spinner_takingtime);
@@ -47,8 +46,13 @@ public class SearchActivity extends Activity {
                 QueryStore.setPlan(QueryStore.fromOrdinal(
                         QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
 
-                intent.putExtra("query", query);
+                if (LocationStore.getLocation() == null) {
+                    Toast toast = Toast.makeText(SearchActivity.this, "位置取得ができませんでした。\nGPSもしくはWifiから位置情報が取得できる場所で利用してください。", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
 
+                Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
                 startActivity(intent);
             }
         });
