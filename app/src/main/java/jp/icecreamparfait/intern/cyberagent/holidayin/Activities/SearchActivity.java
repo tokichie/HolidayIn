@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
+import jp.icecreamparfait.intern.cyberagent.holidayin.RadioButtonIdHash;
 import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 
 
@@ -39,15 +42,26 @@ public class SearchActivity extends Activity {
                 Spinner spinner_moving_time = (Spinner) findViewById(R.id.spinner_movingtime);
                 Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
 
+//                QueryStore.setRequiredTime(QueryStore.fromOrdinal(
+//                        QueryStore.Time.class, spinner_required_time.getSelectedItemPosition()));
+//                QueryStore.setMovingTime(QueryStore.fromOrdinal(
+//                        QueryStore.Time.class, spinner_moving_time.getSelectedItemPosition()));
+//                QueryStore.setPlan(QueryStore.fromOrdinal(
+//                        QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
+
+                RadioGroup rg_required_time = (RadioGroup) findViewById(R.id.radioGroup_requiredTime);
+                RadioGroup rg_moving_time = (RadioGroup) findViewById(R.id.radioGroup_movingTime);
+                RadioGroup rg_mood = (RadioGroup) findViewById(R.id.radioGroup_mood);
+
                 QueryStore.setRequiredTime(QueryStore.fromOrdinal(
-                        QueryStore.Time.class, spinner_required_time.getSelectedItemPosition()));
+                        QueryStore.Time.class, RadioButtonIdHash.hashForRequiredTime.get(rg_required_time.getCheckedRadioButtonId())));
                 QueryStore.setMovingTime(QueryStore.fromOrdinal(
-                        QueryStore.Time.class, spinner_moving_time.getSelectedItemPosition()));
+                        QueryStore.Time.class, RadioButtonIdHash.hashForMovingTime.get(rg_moving_time.getCheckedRadioButtonId())));
                 QueryStore.setPlan(QueryStore.fromOrdinal(
-                        QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
+                        QueryStore.PlanMood.class, RadioButtonIdHash.hashForMood.get(rg_mood.getCheckedRadioButtonId())));
 
                 if (LocationStore.getLocation() == null) {
-                    Toast toast = Toast.makeText(SearchActivity.this, "位置取得ができませんでした。\nGPSもしくはWifiから位置情報が取得できる場所で利用してください。", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(SearchActivity.this, "位置情報が取得できませんでした。\nGPSもしくはWifiから位置情報が取得できる場所で利用してください。", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }

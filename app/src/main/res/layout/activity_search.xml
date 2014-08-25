@@ -121,122 +121,128 @@
 
         <RadioGroup
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup_requiredTime">
 
-                <RadioButton
-                    android:id="@+id/toggleButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ちょっとだけ"
-                    android:button="@null"
-                    android:drawableTop="@drawable/walkpeople"
-                    android:background="@drawable/toggle_button">
-                </RadioButton>
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="ちょっとだけ"
+                android:button="@null"
+                android:drawableTop="@drawable/walkpeople"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1"
+                android:checked="true" />
 
-                <RadioButton
-                    android:id="@+id/toggleButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="軽めにお出かけ"
-                    android:button="@null"
-                    android:drawableTop="@drawable/bicycle"
-                    android:background="@drawable/toggle_button">
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/toggleButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="がっつりお出かけ"
-                    android:button="@null"
-                    android:drawableTop="@drawable/car"
-                    android:background="@drawable/toggle_button">
-                </RadioButton>
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="軽めにお出かけ"
+                android:button="@null"
+                android:drawableTop="@drawable/bicycle"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
 
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="がっつりお出かけ"
+                android:button="@null"
+                android:drawableTop="@drawable/car"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
 
         </RadioGroup>
 
         <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusableInTouchMode="false"
+            android:id="@+id/radioGroup_movingTime">
 
             <RadioButton
-                android:id="@+id/toggleButton4"
-                android:layout_width="wrap_content"
+                android:id="@+id/radioButton4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/slow"
                 android:button="@null"
                 android:background="@drawable/toggle_button"
-                android:text="近場がいい" ></RadioButton>
+                android:text="近場がいい"
+                android:layout_weight="1"
+                android:checked="true"/>
 
             <RadioButton
-                            android:id="@+id/toggleButton5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="ほどほどがいい"
-                            android:button="@null"
-                            android:drawableTop="@drawable/little_fast"
-                            android:background="@drawable/toggle_button" ></RadioButton>
+                android:id="@+id/radioButton5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="ほどほどがいい"
+                android:button="@null"
+                android:drawableTop="@drawable/little_fast"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
 
             <RadioButton
-                            android:id="@+id/toggleButton6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="遠出したい"
-                            android:button="@null"
-                            android:drawableTop="@drawable/fast"
-                            android:background="@drawable/toggle_button" ></RadioButton>
+                android:id="@+id/radioButton6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="遠出したい"
+                android:button="@null"
+                android:drawableTop="@drawable/fast"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
         </RadioGroup>
 
         <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="horizontal">
-
-
-
-
-
-
-
-
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup_mood">
 
             <RadioButton
-                android:id="@+id/toggleButton7"
-                android:layout_width="wrap_content"
+                android:id="@+id/radioButton7"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="優雅に"
                 android:button="@null"
                 android:drawableTop="@drawable/dress"
-                android:background="@drawable/toggle_button" ></RadioButton>
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1"
+                android:checked="true" />
 
             <RadioButton
-                    android:id="@+id/toggleButton8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="楽しく"
-                    android:button="@null"
-                    android:drawableTop="@drawable/enjoy"
-                    android:background="@drawable/toggle_button" ></RadioButton>
+                android:id="@+id/radioButton8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="楽しく"
+                android:button="@null"
+                android:drawableTop="@drawable/enjoy"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
 
             <RadioButton
-                    android:id="@+id/toggleButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="気ままに"
-                    android:button="@null"
-                    android:drawableTop="@drawable/relax"
-                    android:background="@drawable/toggle_button" ></RadioButton>
+                android:id="@+id/radioButton9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="気ままに"
+                android:button="@null"
+                android:drawableTop="@drawable/relax"
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
 
             <RadioButton
-                android:id="@+id/toggleButton10"
-                android:layout_width="wrap_content"
+                android:id="@+id/radioButton10"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="ストレス発散"
                 android:button="@null"
                 android:drawableTop="@drawable/drink"
-                android:background="@drawable/toggle_button" ></RadioButton>
+                android:background="@drawable/toggle_button"
+                android:layout_weight="1" />
         </RadioGroup>
 
 
