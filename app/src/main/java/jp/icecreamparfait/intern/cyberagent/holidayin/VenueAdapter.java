@@ -38,7 +38,7 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 特定の行(position)のデータを得る
-        Venue venue = (Venue)getItem(position);
+        Venue venue = getItem(position);
 
         // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
         if (null == convertView) {
@@ -62,6 +62,7 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
 
         final ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
         imageView_photo.setTag(venue.getId());
+        imageView_photo.setImageResource(R.drawable.noimage);
 
         Bitmap img = PhotoStore.getImage(venue.getId());
         if (img != null) {

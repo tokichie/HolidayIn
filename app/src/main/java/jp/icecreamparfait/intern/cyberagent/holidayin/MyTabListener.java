@@ -4,30 +4,23 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
+import android.util.Log;
 
 public class MyTabListener implements ActionBar.TabListener {
-    private Fragment mFragment;
-
-    public MyTabListener(Fragment fragment) {
-        mFragment = fragment;
-
-    }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        ft.add(R.id.container, mFragment, null);
+        Fragment fragment = (tab.getTag() == "tab1") ? FragmentStore.getTab1Fragment() : FragmentStore.getTab2Fragment();
+        ft.replace(R.id.container, fragment);
     }
 
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        // タブが切り替えられた時の処理
-        // フラグメントを削除する
-        ft.remove(mFragment);
+        Fragment fragment = (tab.getTag() == "tab1") ? FragmentStore.getTab1Fragment() : FragmentStore.getTab2Fragment();
+        ft.remove(fragment);
     }
 
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // 同じタブを再度タップされた時の処理
-        // do nothing
     }
 }

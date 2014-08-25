@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_mood">
+        <item>優雅に</item>
+        <item>楽しく</item>
+        <item>気ままに</item>
+        <item>ストレス発散</item>
+    </string-array>
+</resources>

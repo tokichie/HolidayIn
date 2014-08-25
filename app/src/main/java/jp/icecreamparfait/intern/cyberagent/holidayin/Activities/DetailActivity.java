@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,11 @@ import br.com.condesales.listeners.VenuePhotosListener;
 import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
 import jp.icecreamparfait.intern.cyberagent.holidayin.AsyncCallback;
+import jp.icecreamparfait.intern.cyberagent.holidayin.FragmentStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans.IntellectualPlan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
 import jp.icecreamparfait.intern.cyberagent.holidayin.PhotoStore;
@@ -47,7 +50,6 @@ public class DetailActivity extends Activity implements
         Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener,
         FoursquareVenuesRequestListener{
 
-    private Fragment fragment_tab1;
     private EasyFoursquareAsync api;
 
     private void setActionBar() {
@@ -59,24 +61,33 @@ public class DetailActivity extends Activity implements
         ActionBar.Tab tab1 = actionBar.newTab().setText("スポット");
         ActionBar.Tab tab2 = actionBar.newTab().setText("プラン");
 
-        fragment_tab1 = new Tab1Fragment();
+        tab1.setTag("tab1");
+        tab2.setTag("tab2");
+
+        Fragment fragment_tab1 = new Tab1Fragment();
         Fragment fragment_tab2 = new Tab2Fragment();
 
-        tab1.setTabListener(new MyTabListener(fragment_tab1));
-        tab2.setTabListener(new MyTabListener(fragment_tab2));
+        FragmentStore.setTab1Fragment(fragment_tab1);
+        FragmentStore.setTab2Fragment(fragment_tab2);
+
+        tab1.setTabListener(new MyTabListener());
+        tab2.setTabListener(new MyTabListener());
 
         actionBar.addTab(tab1);
         actionBar.addTab(tab2);
     }
 
     private void startSearch(String query) {
-//        Location loc = new Location("");
-//        loc.setLongitude(139.7069874);
-//        loc.setLatitude(35.6432274);
+        Location loc = new Location("");
+        loc.setLongitude(139.7069874);
+        loc.setLatitude(35.6432274);
 
         VenuesCriteria vCriteria = new VenuesCriteria();
         vCriteria.setQuantity(10);
         vCriteria.setQuery(query);
+        if (LocationStore.getLocation() == null) {
+            Toast.makeText(this, "位置取得ができませんでした。", Toast.LENGTH_SHORT);
+        }
         vCriteria.setLocation(LocationStore.getLocation());
         vCriteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
 
@@ -95,8 +106,11 @@ public class DetailActivity extends Activity implements
         api.getVenuesNearby(new FoursquareVenuesRequestListener() {
             @Override
             public void onVenuesFetched(ArrayList<Venue> venues) {
-                IntellectualPlan.makePlan(venues, 120);
-                Log.d("icecream", venues.toString());
+                IntellectualPlan.setMainSpots(venues);
+                Plan plan = IntellectualPlan.makePlan();
+                if (plan != null) {
+                    ResultStore.setPlan(plan);
+                }
             }
 
             @Override
@@ -104,35 +118,35 @@ public class DetailActivity extends Activity implements
                 Log.d("icecream", errorMsg);
             }
         }, criteria);
-        //IntellectualPlan.search(api, criteria);
-    }
 
-    private void fetchPhotos(ArrayList<Venue> venues) {
-        for (final Venue venue: venues) {
-            api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
-                @Override
-                public void onGotVenuePhotos(PhotosGroup photosGroup) {
-//                    PhotoStore.get().putPhotosGroup(venue.getId(), photosGroup);
+        criteria.setQuantity(10);
+        criteria.setCategories(IntellectualPlan.attachments.keySet());
+
+        api.getVenuesNearby(new FoursquareVenuesRequestListener() {
+            @Override
+            public void onVenuesFetched(ArrayList<Venue> venues) {
+                IntellectualPlan.setAttachments(venues);
+                Plan plan = IntellectualPlan.makePlan();
+                if (plan != null) {
+                    ResultStore.setPlan(plan);
                 }
+            }
 
-                @Override
-                public void onError(String errorMsg) {
-
-                }
-            });
-        }
+            @Override
+            public void onError(String errorMsg) { Log.d("icecream", errorMsg); }
+        }, criteria);
     }
 
     @Override
     public void onVenuesFetched(ArrayList<Venue> venues) {
-//        fetchPhotos(venues);
-
-        ResultStore.get().setResult(venues);
+        ResultStore.setResult(venues);
 
         Bundle bundle = new Bundle();
         bundle.putBoolean("finished", true);
-        fragment_tab1 = new Tab1Fragment();
+        Fragment fragment_tab1 = new Tab1Fragment();
         fragment_tab1.setArguments(bundle);
+
+        FragmentStore.setTab1Fragment(fragment_tab1);
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.container, fragment_tab1);
@@ -152,14 +166,14 @@ public class DetailActivity extends Activity implements
         api = new EasyFoursquareAsync(this);
 
         setActionBar();
-        startSearch(ResultStore.get().getQuery());
+        startSearch(ResultStore.getQuery());
         startSearchWithPlan();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.detail, menu);
+        //getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
 

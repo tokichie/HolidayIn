@@ -8,7 +8,7 @@ import android.location.Location;
 public class LocationStore {
     private static LocationStore instance = new LocationStore();
 
-    private static Location mLocation;
+    private static Location mLocation = null;
 
     public static void setLocation(Location loc) {
         mLocation = loc;

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_required_time">
+        <item>ちょっとだけ</item>
+        <item>軽めにお出かけ</item>
+        <item>がっつりお出かけ</item>
+    </string-array>
+</resources>

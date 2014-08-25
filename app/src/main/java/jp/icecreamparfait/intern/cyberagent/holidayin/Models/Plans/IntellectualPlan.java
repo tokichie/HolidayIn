@@ -1,13 +1,14 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Random;
 
-import br.com.condesales.EasyFoursquareAsync;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.listeners.FoursquareVenuesRequestListener;
 import br.com.condesales.models.Venue;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
 
 /**
  * Created by tokitake on 2014/08/24.
@@ -24,7 +25,7 @@ public class IntellectualPlan{
                 }
             };
 
-    public static HashMap<String, Integer> cafes =
+    public static HashMap<String, Integer> attachments =
             new HashMap<String, Integer>() {
                 {
                     put("4bf58dd8d48988d16d941735", 60);  //Cafe
@@ -34,8 +35,48 @@ public class IntellectualPlan{
                 }
             };
 
-    public static void makePlan(ArrayList<Venue> venues, int amountTime) {
+    private static Plan mPlan;
+    private static boolean isSetMainSpots = false;
+    private static boolean isSetAttachments = false;
 
+    public static Plan makePlan() {
+        if (isSetMainSpots && isSetAttachments) {
+            return mPlan;
+        }
+        return null;
+    }
+
+    public static void setMainSpots(ArrayList<Venue> venues) {
+        int spotsCount = QueryStore.getRequiredTime().ordinal() + 1;
+
+        if (mPlan == null) {
+            mPlan = new Plan();
+        }
+
+        Log.d("icecream", String.valueOf(venues.size()));
+        while (spotsCount-- > 0) {
+            Random rnd = new Random();
+            int selectedPos = rnd.nextInt(venues.size());
+            Venue venue = venues.get(selectedPos);
+
+            mPlan.addVenue(venue);//, belongingCategories.get(venue.getCategories().get(0).getId()));
+        }
+
+        isSetMainSpots = true;
+    }
+
+    public static void setAttachments(ArrayList<Venue> venues) {
+        if (mPlan == null) {
+            mPlan = new Plan();
+        }
+
+        Random rnd = new Random();
+        int selectedPos = rnd.nextInt(venues.size());
+        Venue venue = venues.get(selectedPos);
+
+        mPlan.setAttachment(venue);
+
+        isSetAttachments = true;
     }
 
 }
