@@ -1,6 +1,7 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,43 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 
 
 public class SearchActivity extends Activity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        adapter.add("1h");
-        adapter.add("2h");
-        adapter.add("3h");
-
-        Spinner spinner_takingtime = (Spinner) findViewById(R.id.spinner_takingtime);
-        spinner_takingtime.setAdapter(adapter);
-
-        Spinner spinner_movingtime = (Spinner) findViewById(R.id.spinner_movingtime);
-        spinner_movingtime.setAdapter(adapter);
-
-        ArrayAdapter<String> adaptermood = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        adaptermood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        adaptermood.add("優雅に");
-        adaptermood.add("楽しく");
-        adaptermood.add("気ままに");
-        adaptermood.add("ストレス発散");
-
-        Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
-        spinner_mood.setAdapter(adaptermood);
-
 
         Button button_search = (Button) findViewById(R.id.button_search);
         button_search.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +33,27 @@ public class SearchActivity extends Activity {
                 Intent intent = new Intent(SearchActivity.this, DetailActivity.class);
                 //Intent intent = new Intent(SearchActivity.this, MyActivity.class);
                 String query = editText_keyword.getText().toString();
-                ResultStore.get().setQuery(query);
+                ResultStore.setQuery(query);
+                QueryStore.setQuery(query);
+
+                Spinner spinner_required_time = (Spinner) findViewById(R.id.spinner_takingtime);
+                Spinner spinner_moving_time = (Spinner) findViewById(R.id.spinner_movingtime);
+                Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
+
+                QueryStore.setRequiredTime(QueryStore.fromOrdinal(
+                        QueryStore.Time.class, spinner_required_time.getSelectedItemPosition()));
+                QueryStore.setMovingTime(QueryStore.fromOrdinal(
+                        QueryStore.Time.class, spinner_moving_time.getSelectedItemPosition()));
+                QueryStore.setPlan(QueryStore.fromOrdinal(
+                        QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
+
                 intent.putExtra("query", query);
+
                 startActivity(intent);
             }
         });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

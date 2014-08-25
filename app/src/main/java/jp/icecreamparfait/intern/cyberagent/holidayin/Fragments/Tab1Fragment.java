@@ -73,11 +73,11 @@ public class Tab1Fragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tab1_loading, container, false);
         if (isFinished) {
             v = inflater.inflate(R.layout.fragment_tab1, container, false);
-            List<Venue> venues = ResultStore.get().getResult();
+            List<Venue> venues = ResultStore.getResult();
 
             VenueAdapter adapter = new VenueAdapter(getActivity(), 0, venues);
 
-            ListView listView = (ListView) v.findViewById(R.id.listView_detail);
+            ListView listView = (ListView) v.findViewById(R.id.listView_detail_spot);
             listView.setAdapter(adapter);
         }
 

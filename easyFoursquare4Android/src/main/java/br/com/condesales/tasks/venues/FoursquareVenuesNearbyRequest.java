@@ -106,8 +106,6 @@ public class FoursquareVenuesNearbyRequest extends
                 uri = uri + "&client_id=" + FoursquareConstants.CLIENT_ID + "&client_secret=" + FoursquareConstants.CLIENT_SECRET;
             }
 
-            Log.d("4sq", uri);
-
             JSONObject venuesJson = executeHttpGet(uri);
 
             // Get return code

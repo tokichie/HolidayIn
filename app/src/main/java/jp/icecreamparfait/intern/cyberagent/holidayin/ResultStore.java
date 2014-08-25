@@ -3,45 +3,37 @@ package jp.icecreamparfait.intern.cyberagent.holidayin;
 import java.util.List;
 
 import br.com.condesales.models.Venue;
+import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
 
 /**
  * Created by tokitake on 2014/08/23.
  */
 public class ResultStore {
-    private static ResultStore instance;
+    private static ResultStore instance = new ResultStore();
 
-    private String mQuery = "ebisu";
+    private static String mQuery = "ebisu";
 
-    private List<Venue> mVenues;
+    private static List<Venue> mVenues;
 
-    private boolean isStored = false;
+    private static Plan mPlan;
 
-    public static ResultStore get() {
-        if (instance == null) {
-            instance = new ResultStore();
-        }
-
-        return instance;
-    }
-
-    public void setQuery(String query) {
+    public static void setQuery(String query) {
         mQuery = query;
     }
 
-    public void setResult(List<Venue> venues) {
-        mVenues = venues;
-        isStored = true;
-    }
+    public static void setPlan(Plan plan) { mPlan = plan; }
 
-    public String getQuery() { return mQuery; }
+    public static void setResult(List<Venue> venues) { mVenues = venues; }
 
-    public List<Venue> getResult() { return mVenues; }
+    public static String getQuery() { return mQuery; }
 
-    public boolean getIsStored() { return isStored; }
+    public static Plan getPlan() { return mPlan; }
 
-    public void reset() {
+    public static List<Venue> getResult() { return mVenues; }
+
+    public static void reset() {
         mQuery = null;
         mVenues = null;
-        isStored = false;
+        mPlan = null;
     }
 }

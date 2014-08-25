@@ -38,55 +38,14 @@ public class VenueAdapter extends ArrayAdapter<Venue> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 特定の行(position)のデータを得る
-        Venue venue = (Venue)getItem(position);
+        Venue venue = getItem(position);
 
         // convertViewは使い回しされている可能性があるのでnullの時だけ新しく作る
         if (null == convertView) {
             convertView = layoutInflater_.inflate(R.layout.detail_row, null);
         }
 
-        List<Category> categories = venue.getCategories();
-        String category = "";
-        for (int i = 0; i < categories.size(); i++) {
-            category += categories.get(i).getName();
-            if (i != categories.size()-1) category += ", ";
-        }
-
-        TextView textView_title;
-        textView_title = (TextView)convertView.findViewById(R.id.textView_title);
-        textView_title.setText(venue.getName());
-
-        TextView textView_category;
-        textView_category = (TextView) convertView.findViewById(R.id.textView_category);
-        textView_category.setText(category);
-
-        final ImageView imageView_photo = (ImageView) convertView.findViewById(R.id.imageView_photo);
-        imageView_photo.setTag(venue.getId());
-
-        Bitmap img = PhotoStore.getImage(venue.getId());
-        if (img != null) {
-            imageView_photo.setImageBitmap(img);
-        } else {
-            EasyFoursquareAsync api = new EasyFoursquareAsync(mActivity);
-            api.getVenuePhotos(venue.getId(), new VenuePhotosListener() {
-                @Override
-                public void onGotVenuePhotos(PhotosGroup photosGroup) {
-                    if (photosGroup.getCount() > 0) {
-                        List<PhotoItem> photoItems = photosGroup.getItems();
-                        String prefix = photoItems.get(0).getPrefix();
-                        String suffix = photoItems.get(0).getSuffix();
-
-                        PhotoGetter getter = new PhotoGetter(imageView_photo);
-                        getter.execute(prefix + "200x200" + suffix);
-                    }
-                }
-
-                @Override
-                public void onError(String errorMsg) {
-
-                }
-            });
-        }
+        VenueDetailSetter.set(mActivity, venue, convertView);
 
         return convertView;
     }

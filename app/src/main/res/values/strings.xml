@@ -16,5 +16,6 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_my">MyActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="keyword_hint">指定すると精度が上がります</string>
 
 </resources>
