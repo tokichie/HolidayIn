@@ -69,6 +69,7 @@ public class DetailActivity extends Activity implements
         vCriteria.setQuery(query);
         if (LocationStore.getLocation() == null) {
             Toast.makeText(this, "位置取得ができませんでした。", Toast.LENGTH_SHORT);
+            Log.d("icecream", "位置取得ができませんでした。");
         }
         vCriteria.setLocation(LocationStore.getLocation());
         vCriteria.setRadius((QueryStore.getMovingTime().ordinal()+1) * 5000);
