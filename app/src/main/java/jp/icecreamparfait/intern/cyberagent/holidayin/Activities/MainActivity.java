@@ -60,10 +60,21 @@ public class MainActivity extends Activity implements LocationListener{
 
         Button button_no_login = (Button) findViewById(R.id.button_nologin);
         Button button_map = (Button) findViewById(R.id.button_map);
+        Button button_tutorial = (Button) findViewById(R.id.button_tutorial);
         button_no_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startSearchActivity();
+            }
+        });
+        button_tutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Uri uri = Uri.parse("https://foursquare.com/venue/503de4dce4b0857b003af5f7");
+//                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(intent);
+                Intent intent_search = new Intent(MainActivity.this, TutorialActivity.class);
+                startActivity(intent_search);
             }
         });
         button_map.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +91,8 @@ public class MainActivity extends Activity implements LocationListener{
 
         ensureUi();
     }
+
+
 
     private void startSearchActivity() {
         Intent intent_search = new Intent(MainActivity.this, SearchActivity.class);

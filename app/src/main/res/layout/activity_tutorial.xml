@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:background="@drawable/forest_blue"
+    tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.Activities.TutorialActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -36,55 +40,81 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="とは、"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 android:id="@+id/textView"
+                android:textColor="#ffffff"
+                android:shadowColor="#00CED1"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="1.5"
 
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="あなたの気分や予定によって"
                 android:id="@+id/textView3"
-                android:textSize="20sp"
+                android:textSize="21sp"
+                android:textColor="#ffffff"
+                android:shadowColor="#00CED1"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="1.5"
 
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="お出かけのプランを"
                 android:id="@+id/textView4"
-                android:textSize="20sp"
+                android:textSize="21sp"
+                android:textColor="#ffffff"
+                android:shadowColor="#00CED1"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="1.5"
 
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="提案してくれるアプリです。"
                 android:id="@+id/textView5"
-                android:textSize="20sp"
+                android:textSize="21sp"
+                android:textColor="#ffffff"
+                android:shadowColor="#00CED1"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="1.5"
 
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="25dp" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="64dp"
-                android:text="@string/no_login"
-                android:id="@+id/button_tutorial"
+                android:text="Go"
+                android:id="@+id/button_searchtutorial"
                 android:layout_gravity="center_horizontal"
-                android:layout_above="@id/button_tutorial"
+                android:layout_above="@id/button_searchtutorial"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/button_round"
                 android:textColor="#ffffff"
+
+
+                android:textSize="21sp"
+
+
+
                 android:layout_marginBottom="15dp"
-                android:layout_marginTop="40dp" />
+                android:layout_marginTop="25dp" />
 
 
         </LinearLayout>
