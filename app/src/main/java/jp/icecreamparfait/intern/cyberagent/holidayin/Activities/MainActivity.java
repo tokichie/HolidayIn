@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -26,6 +27,7 @@ import com.foursquare.android.nativeoauth.FoursquareUnsupportedVersionException;
 import com.foursquare.android.nativeoauth.model.AccessTokenResponse;
 import com.foursquare.android.nativeoauth.model.AuthCodeResponse;
 
+import br.com.condesales.constants.FoursquareConstants;
 import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.TokenStore;
@@ -184,6 +186,12 @@ public class MainActivity extends Activity implements LocationListener{
             // Persist the token for later use. In this example, we save
             // it to shared prefs.
             TokenStore.get().setToken(accessToken);
+
+            SharedPreferences settings = this.getSharedPreferences(
+                    FoursquareConstants.SHARED_PREF_FILE, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString(FoursquareConstants.ACCESS_TOKEN, accessToken);
+            editor.commit();
 
             startSearchActivity();
 
