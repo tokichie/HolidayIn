@@ -74,7 +74,7 @@ public class Tab1Fragment extends Fragment implements AdapterView.OnItemClickLis
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_tab1_loading, container, false);
-        if (isFinished) {
+        if (isFinished && ResultStore.getIsFound()) {
             v = inflater.inflate(R.layout.fragment_tab1, container, false);
             List<Venue> venues = ResultStore.getResult();
 

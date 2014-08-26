@@ -15,9 +15,15 @@ public class ResultStore {
 
     private static Plan mPlan;
 
+    private static boolean mIsFound = true;
+
+    public static void setIsFound(boolean isFound) { mIsFound = isFound; }
+
     public static void setPlan(Plan plan) { mPlan = plan; }
 
     public static void setResult(List<Venue> venues) { mVenues = venues; }
+
+    public static boolean getIsFound() { return mIsFound; }
 
     public static Plan getPlan() { return mPlan; }
 
@@ -26,5 +32,6 @@ public class ResultStore {
     public static void reset() {
         mVenues = null;
         mPlan = null;
+        mIsFound = true;
     }
 }

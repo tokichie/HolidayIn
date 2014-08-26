@@ -38,17 +38,6 @@ public class SearchActivity extends Activity {
                 String query = editText_keyword.getText().toString();
                 QueryStore.setQuery(query);
 
-                Spinner spinner_required_time = (Spinner) findViewById(R.id.spinner_takingtime);
-                Spinner spinner_moving_time = (Spinner) findViewById(R.id.spinner_movingtime);
-                Spinner spinner_mood = (Spinner) findViewById(R.id.spinner_mood);
-
-//                QueryStore.setRequiredTime(QueryStore.fromOrdinal(
-//                        QueryStore.Time.class, spinner_required_time.getSelectedItemPosition()));
-//                QueryStore.setMovingTime(QueryStore.fromOrdinal(
-//                        QueryStore.Time.class, spinner_moving_time.getSelectedItemPosition()));
-//                QueryStore.setPlan(QueryStore.fromOrdinal(
-//                        QueryStore.PlanMood.class, spinner_mood.getSelectedItemPosition()));
-
                 RadioGroup rg_required_time = (RadioGroup) findViewById(R.id.radioGroup_requiredTime);
                 RadioGroup rg_moving_time = (RadioGroup) findViewById(R.id.radioGroup_movingTime);
                 RadioGroup rg_mood = (RadioGroup) findViewById(R.id.radioGroup_mood);

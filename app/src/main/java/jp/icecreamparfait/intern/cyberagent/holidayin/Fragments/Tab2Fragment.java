@@ -38,14 +38,16 @@ public class Tab2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_tab2, container, false);
 
-        Plan plan = ResultStore.getPlan();
+        if (ResultStore.getIsFound()) {
+            Plan plan = ResultStore.getPlan();
 
-        List<Plan> plans = new ArrayList<Plan>();
-        plans.add(plan);
-        PlanAdapter adapter = new PlanAdapter(getActivity(), 0, plans);
+            List<Plan> plans = new ArrayList<Plan>();
+            plans.add(plan);
+            PlanAdapter adapter = new PlanAdapter(getActivity(), 0, plans);
 
-        ListView listView = (ListView) v.findViewById(R.id.listView_detail_plan);
-        listView.setAdapter(adapter);
+            ListView listView = (ListView) v.findViewById(R.id.listView_detail_plan);
+            listView.setAdapter(adapter);
+        }
 
         return v;
     }

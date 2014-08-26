@@ -30,8 +30,7 @@ import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 
 public class DetailActivity extends Activity implements
-        Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener,
-        FoursquareVenuesRequestListener{
+        Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener{
 
     private EasyFoursquareAsync api;
 
@@ -73,7 +72,36 @@ public class DetailActivity extends Activity implements
         criteria.setIntent(VenuesCriteria.VenuesCriteriaIntent.CHECKIN);
         criteria.setCategories(basePlan.belongingCategories.keySet());
 
-        api.getVenuesNearby(this, criteria);
+        final Context context = this;
+        api.getVenuesNearby(new FoursquareVenuesRequestListener() {
+            @Override
+            public void onVenuesFetched(ArrayList<Venue> venues) {
+                if (venues.size() == 0) {
+                    Toast toast = Toast.makeText(context, "見つかりませんでした", Toast.LENGTH_SHORT);
+                    toast.show();
+                    ResultStore.setIsFound(false);
+                    return;
+                }
+
+                ResultStore.setResult(venues);
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("finished", true);
+                Fragment fragment_tab1 = new Tab1Fragment();
+                fragment_tab1.setArguments(bundle);
+
+                FragmentStore.setTab1Fragment(fragment_tab1);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, fragment_tab1);
+                ft.commit();
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+
+            }
+        }, criteria);
     }
 
     private void startSearchWithPlan() {
@@ -97,7 +125,8 @@ public class DetailActivity extends Activity implements
             @Override
             public void onVenuesFetched(ArrayList<Venue> venues) {
                 if (venues.size() == 0) {
-                    Toast toast = Toast.makeText(context, "見つかりませんでした", Toast.LENGTH_SHORT);
+                    ResultStore.setIsFound(false);
+                    return;
                 }
                 basePlan.setMainSpots(venues);
                 Plan plan = basePlan.makePlan();
@@ -133,27 +162,6 @@ public class DetailActivity extends Activity implements
             @Override
             public void onError(String errorMsg) { Log.d("icecream", errorMsg); }
         }, criteria);
-    }
-
-    @Override
-    public void onVenuesFetched(ArrayList<Venue> venues) {
-        ResultStore.setResult(venues);
-
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("finished", true);
-        Fragment fragment_tab1 = new Tab1Fragment();
-        fragment_tab1.setArguments(bundle);
-
-        FragmentStore.setTab1Fragment(fragment_tab1);
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.container, fragment_tab1);
-        ft.commit();
-    }
-
-    @Override
-    public void onError(String errorMsg) {
-
     }
 
     @Override
