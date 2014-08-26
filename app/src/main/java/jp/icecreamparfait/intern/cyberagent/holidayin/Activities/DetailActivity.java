@@ -152,6 +152,10 @@ public class DetailActivity extends Activity implements
         api.getVenuesNearby(new FoursquareVenuesRequestListener() {
             @Override
             public void onVenuesFetched(ArrayList<Venue> venues) {
+                if (venues.size() == 0) {
+                    ResultStore.setIsFound(false);
+                    return;
+                }
                 basePlan.setAttachments(venues);
                 Plan plan = basePlan.makePlan();
                 if (plan != null) {
@@ -168,6 +172,8 @@ public class DetailActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        ResultStore.setIsFound(true);
 
         api = new EasyFoursquareAsync(this);
 

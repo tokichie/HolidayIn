@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -243,6 +244,7 @@ public class MainActivity extends Activity implements LocationListener{
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("icecream", "location was set (main)");
         LocationStore.setLocation(location);
     }
 
