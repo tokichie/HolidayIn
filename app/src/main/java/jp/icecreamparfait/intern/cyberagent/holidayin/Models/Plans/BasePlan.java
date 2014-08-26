@@ -1,12 +1,12 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans;
+package jp.icecreamparfait.intern.cyberagent.holidayin.models.plans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
-import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.QueryStore;
 
 /**
  * Created by tokitake on 2014/08/25.

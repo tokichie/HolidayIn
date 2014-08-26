@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.stores;
 
 import android.location.Location;
 

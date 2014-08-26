@@ -1,7 +1,6 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.stores;
 
 import android.app.Fragment;
-import android.location.Location;
 
 /**
  * Created by tokitake on 2014/08/23.

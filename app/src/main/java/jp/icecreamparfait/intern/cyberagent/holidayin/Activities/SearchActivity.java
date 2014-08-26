@@ -1,31 +1,20 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
+package jp.icecreamparfait.intern.cyberagent.holidayin.activities;
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
-import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.LocationStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.QueryStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.RadioButtonIdHash;
-import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
 
 
 public class SearchActivity extends Activity{

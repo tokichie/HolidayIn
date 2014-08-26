@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment">
+    tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.fragments.Tab2Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <!--TextView

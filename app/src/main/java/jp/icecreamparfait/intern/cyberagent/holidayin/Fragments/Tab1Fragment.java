@@ -1,53 +1,23 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
+package jp.icecreamparfait.intern.cyberagent.holidayin.fragments;
 
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.List;
 
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.CheckInCriteria;
-import br.com.condesales.criterias.TipsCriteria;
-import br.com.condesales.criterias.TrendingVenuesCriteria;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.Checkin;
-import br.com.condesales.models.PhotoItem;
-import br.com.condesales.models.PhotosGroup;
-import br.com.condesales.models.Score;
-import br.com.condesales.models.ScoreItem;
-import br.com.condesales.models.Statistics;
-import br.com.condesales.models.Tip;
-import br.com.condesales.models.TipItem;
-import br.com.condesales.models.TipsGroup;
 import br.com.condesales.models.Venue;
-import fi.foyt.foursquare.api.FoursquareApi;
-import fi.foyt.foursquare.api.FoursquareApiException;
-import fi.foyt.foursquare.api.Result;
-import fi.foyt.foursquare.api.entities.CompactVenue;
-import fi.foyt.foursquare.api.entities.CompleteSpecial;
-import fi.foyt.foursquare.api.entities.CompleteTip;
-import fi.foyt.foursquare.api.entities.Stats;
-import fi.foyt.foursquare.api.entities.TipGroup;
-import fi.foyt.foursquare.api.entities.Tips;
-import fi.foyt.foursquare.api.entities.VenueGroup;
-import fi.foyt.foursquare.api.entities.VenuesSearchResult;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.MainActivity;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Activities.VenueDetailActivity;
-import jp.icecreamparfait.intern.cyberagent.holidayin.PhotoGetter;
+import jp.icecreamparfait.intern.cyberagent.holidayin.activities.VenueDetailActivity;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.ResultStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 
 

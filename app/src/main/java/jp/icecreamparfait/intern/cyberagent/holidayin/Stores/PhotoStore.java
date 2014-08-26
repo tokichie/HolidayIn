@@ -1,12 +1,9 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.stores;
 
 import android.graphics.Bitmap;
-import android.location.Location;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import br.com.condesales.models.PhotosGroup;
 
 /**
  * Created by tokitake on 2014/08/23.

@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@drawable/sea"
 
-    tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.Activities.MainActivity">
+    tools:context="jp.icecreamparfait.intern.cyberagent.holidayin.activities.MainActivity">
 
     <ImageView
         android:layout_width="fill_parent"

@@ -4,7 +4,8 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
-import android.util.Log;
+
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.FragmentStore;
 
 public class MyTabListener implements ActionBar.TabListener {
 

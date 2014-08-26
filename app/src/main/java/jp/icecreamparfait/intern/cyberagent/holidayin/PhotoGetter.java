@@ -1,18 +1,16 @@
 package jp.icecreamparfait.intern.cyberagent.holidayin;
 
-import android.content.AsyncTaskLoader;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
+
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.PhotoStore;
 
 /**
  * Created by tokitake on 2014/08/22.

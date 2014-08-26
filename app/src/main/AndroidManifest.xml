@@ -24,7 +24,7 @@
             android:value="AIzaSyAQYnEva2uluLrj4wR96doQ_c7ttZ2blUI" />
 
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -34,25 +34,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.TutorialActivity"
+            android:name=".activities.TutorialActivity"
             android:label="@string/title_activity_tutorial"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".Activities.SearchActivity"
+            android:name=".activities.SearchActivity"
             android:label="@string/title_activity_search"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".Activities.VenueDetailActivity"
+            android:name=".activities.VenueDetailActivity"
             android:label="map"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activities.PlanDetailActivity"
+            android:label="plan_map"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.foursquare.android.nativeoauth.TokenExchangeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activities.DetailActivity"
+            android:name=".activities.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/DetailTheme"
             android:screenOrientation="portrait">

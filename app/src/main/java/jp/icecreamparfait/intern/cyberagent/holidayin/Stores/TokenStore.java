@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.stores;
 
 /**
  * Created by tokitake on 2014/08/21.

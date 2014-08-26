@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
+package jp.icecreamparfait.intern.cyberagent.holidayin.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -18,16 +18,16 @@ import br.com.condesales.EasyFoursquareAsync;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.listeners.FoursquareVenuesRequestListener;
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.FragmentStore;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans.BasePlan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.FragmentStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.fragments.Tab1Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.fragments.Tab2Fragment;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.LocationStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.plans.BasePlan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
-import jp.icecreamparfait.intern.cyberagent.holidayin.QueryStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.QueryStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.ResultStore;
 
 public class DetailActivity extends Activity implements
         Tab1Fragment.OnFragmentInteractionListener, Tab2Fragment.OnFragmentInteractionListener{

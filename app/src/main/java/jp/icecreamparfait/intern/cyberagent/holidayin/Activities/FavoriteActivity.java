@@ -1,6 +1,5 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
+package jp.icecreamparfait.intern.cyberagent.holidayin.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Criteria;
@@ -19,10 +18,7 @@ import java.util.List;
 import br.com.condesales.EasyFoursquare;
 import br.com.condesales.criterias.VenuesCriteria;
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Favorite1Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab1Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Fragments.Tab2Fragment;
-import jp.icecreamparfait.intern.cyberagent.holidayin.MyTabListener;
+import jp.icecreamparfait.intern.cyberagent.holidayin.fragments.Favorite1Fragment;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
 import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
 

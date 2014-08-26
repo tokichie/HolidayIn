@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
+package jp.icecreamparfait.intern.cyberagent.holidayin.fragments;
 
 import android.app.Activity;
 import android.net.Uri;

@@ -2,29 +2,18 @@ package jp.icecreamparfait.intern.cyberagent.holidayin;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-import br.com.condesales.EasyFoursquareAsync;
-import br.com.condesales.listeners.VenuePhotosListener;
-import br.com.condesales.models.Category;
-import br.com.condesales.models.PhotoItem;
-import br.com.condesales.models.PhotosGroup;
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.ResultStore;
 
 /**
  * Created by tokitake on 2014/08/21.

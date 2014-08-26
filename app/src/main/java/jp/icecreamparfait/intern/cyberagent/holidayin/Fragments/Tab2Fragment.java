@@ -1,27 +1,25 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Fragments;
+package jp.icecreamparfait.intern.cyberagent.holidayin.fragments;
 
 import android.app.Activity;
-import android.location.Location;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.condesales.EasyFoursquare;
-import br.com.condesales.criterias.VenuesCriteria;
-import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.activities.PlanDetailActivity;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.Plan;
 import jp.icecreamparfait.intern.cyberagent.holidayin.PlanAdapter;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.PlanStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.ResultStore;
-import jp.icecreamparfait.intern.cyberagent.holidayin.VenueAdapter;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.ResultStore;
 
 
 public class Tab2Fragment extends Fragment {
@@ -45,8 +43,26 @@ public class Tab2Fragment extends Fragment {
             plans.add(plan);
             PlanAdapter adapter = new PlanAdapter(getActivity(), 0, plans);
 
+            PlanStore.setPlans(plans);
+
             ListView listView = (ListView) v.findViewById(R.id.listView_detail_plan);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+//                    String uriBegin = "geo:35.6582,139.699?q[]=";
+//                    String encodedQuery1 = Uri.encode("35.6582,139.699");
+//                    String encodedQuery2 = Uri.encode("35.6082,139.699");
+//                    String encodedQuery3 = Uri.encode("35.7082,139.699");
+//                    Uri uri = Uri.parse(uriBegin + encodedQuery1 + "&amp;q[]=" + encodedQuery2);
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                    startActivity(intent);
+
+                    Intent intent = new Intent(getActivity(), PlanDetailActivity.class);
+                    intent.putExtra("selectedPosition", pos);
+                    startActivity(intent);
+                }
+            });
         }
 
         return v;

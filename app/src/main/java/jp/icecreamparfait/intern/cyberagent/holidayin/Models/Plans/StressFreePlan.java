@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plans;
+package jp.icecreamparfait.intern.cyberagent.holidayin.models.plans;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Models;
+package jp.icecreamparfait.intern.cyberagent.holidayin.models;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin.Activities;
+package jp.icecreamparfait.intern.cyberagent.holidayin.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,9 +29,9 @@ import com.foursquare.android.nativeoauth.model.AccessTokenResponse;
 import com.foursquare.android.nativeoauth.model.AuthCodeResponse;
 
 import br.com.condesales.constants.FoursquareConstants;
-import jp.icecreamparfait.intern.cyberagent.holidayin.LocationStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.LocationStore;
 import jp.icecreamparfait.intern.cyberagent.holidayin.R;
-import jp.icecreamparfait.intern.cyberagent.holidayin.TokenStore;
+import jp.icecreamparfait.intern.cyberagent.holidayin.stores.TokenStore;
 
 
 public class MainActivity extends Activity implements LocationListener{

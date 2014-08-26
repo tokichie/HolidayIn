@@ -1,9 +1,9 @@
-package jp.icecreamparfait.intern.cyberagent.holidayin;
+package jp.icecreamparfait.intern.cyberagent.holidayin.stores;
 
 import java.util.List;
 
 import br.com.condesales.models.Venue;
-import jp.icecreamparfait.intern.cyberagent.holidayin.Models.Plan;
+import jp.icecreamparfait.intern.cyberagent.holidayin.models.Plan;
 
 /**
  * Created by tokitake on 2014/08/23.

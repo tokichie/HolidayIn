@@ -88,6 +88,13 @@
                         android:id="@+id/imageView_time"
                         android:orientation="vertical"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/textView_distance"
+                        android:layout_marginLeft="5dp" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -106,7 +113,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="jp.icecreamparfait.intern.cyberagent.holidayin.Activities.VenueDetailActivity$SingleFlagment"
+        android:name="jp.icecreamparfait.intern.cyberagent.holidayin.activities.VenueDetailActivity$SingleFlagment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
